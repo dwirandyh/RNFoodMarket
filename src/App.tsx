@@ -7,10 +7,13 @@
 
 import React from 'react';
 import { SplashScreen } from './pages';
+import { NavigationContainer } from '@react-navigation/native';
 
 function App(): JSX.Element {
   return (
-    <SplashScreen />
+    <NavigationContainer>
+      <SplashScreen />
+    </NavigationContainer>
   );
 }
 

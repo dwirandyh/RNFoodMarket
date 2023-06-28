@@ -14,8 +14,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-RNFoodMarket-RNFoodMarketTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-RNFoodMarket-RNFoodMarketTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		E0DE044F16EA4FFAB1B64D14 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BED58281CCE64FCB9F6DE65D /* Poppins-Light.ttf */; };
 		D440A13C207E4169833CB2AD /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2881EAC55CDC4A8AB3AB8969 /* Poppins-Medium.ttf */; };
+		E0DE044F16EA4FFAB1B64D14 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BED58281CCE64FCB9F6DE65D /* Poppins-Light.ttf */; };
 		F55F62058512494EA5B1E020 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F868EDCA7D44983860E76E0 /* Poppins-Regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -40,16 +40,16 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RNFoodMarket/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RNFoodMarket/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-RNFoodMarket-RNFoodMarketTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFoodMarket-RNFoodMarketTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2881EAC55CDC4A8AB3AB8969 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-RNFoodMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFoodMarket.debug.xcconfig"; path = "Target Support Files/Pods-RNFoodMarket/Pods-RNFoodMarket.debug.xcconfig"; sourceTree = "<group>"; };
+		4F868EDCA7D44983860E76E0 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-RNFoodMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFoodMarket.release.xcconfig"; path = "Target Support Files/Pods-RNFoodMarket/Pods-RNFoodMarket.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-RNFoodMarket-RNFoodMarketTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFoodMarket-RNFoodMarketTests.debug.xcconfig"; path = "Target Support Files/Pods-RNFoodMarket-RNFoodMarketTests/Pods-RNFoodMarket-RNFoodMarketTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-RNFoodMarket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNFoodMarket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RNFoodMarket/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-RNFoodMarket-RNFoodMarketTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFoodMarket-RNFoodMarketTests.release.xcconfig"; path = "Target Support Files/Pods-RNFoodMarket-RNFoodMarketTests/Pods-RNFoodMarket-RNFoodMarketTests.release.xcconfig"; sourceTree = "<group>"; };
+		BED58281CCE64FCB9F6DE65D /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		BED58281CCE64FCB9F6DE65D /* Poppins-Light.ttf */ = {isa = PBXFileReference; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2881EAC55CDC4A8AB3AB8969 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4F868EDCA7D44983860E76E0 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +87,17 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0ABFEC5BF0664607B2F513CE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BED58281CCE64FCB9F6DE65D /* Poppins-Light.ttf */,
+				2881EAC55CDC4A8AB3AB8969 /* Poppins-Medium.ttf */,
+				4F868EDCA7D44983860E76E0 /* Poppins-Regular.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		13B07FAE1A68108700A75B9A /* RNFoodMarket */ = {
@@ -154,17 +165,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		0ABFEC5BF0664607B2F513CE /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				BED58281CCE64FCB9F6DE65D /* Poppins-Light.ttf */,
-				2881EAC55CDC4A8AB3AB8969 /* Poppins-Medium.ttf */,
-				4F868EDCA7D44983860E76E0 /* Poppins-Regular.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
