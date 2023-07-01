@@ -1,1 +1,2 @@
-export * from './Illustration';
+export * from './illustration';
+export * from './icon'

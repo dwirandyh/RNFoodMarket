@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 export enum ButtonType {
@@ -9,17 +9,20 @@ export enum ButtonType {
 type Props = {
     text: string,
     type: ButtonType,
+    onPress: () => void
 }
 
 const Button = (props: Props) => {
-    const { text, type } = props
+    const { text, type, onPress } = props
     const containerStyle = type === ButtonType.Primary ? styles.primaryContainer : styles.secondaryContainer
     const textStyle = type === ButtonType.Primary ? styles.primaryText : styles.secondaryContainer
 
     return (
-        <View style={[styles.container, containerStyle]}>
-            <Text style={[styles.text, textStyle]}>{text}</Text>
-        </View>
+        <TouchableOpacity onPress={onPress}>
+            <View style={[styles.container, containerStyle]}>
+                <Text style={[styles.text, textStyle]}>{text}</Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 
