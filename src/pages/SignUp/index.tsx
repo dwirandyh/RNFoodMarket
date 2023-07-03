@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Button, ButtonType, Gap, Header, TextInput } from '../../components'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../../router'
 
-type Props = {}
+type Props = NativeStackScreenProps<RootStackParamList>
 
-const SignUp = (props: Props) => {
+const SignUp = ({ navigation }: Props) => {
     return (
         <View style={styles.container}>
             <Header title='Sign Up' subtitle='Register and eat' onBack={() => { }} />
@@ -24,7 +26,7 @@ const SignUp = (props: Props) => {
                 <Gap height={16} />
                 <TextInput text='Password' placeholder='Type your password' />
                 <Gap height={16} />
-                <Button text='Continue' type={ButtonType.Primary} onPress={() => { }} />
+                <Button text='Continue' type={ButtonType.Primary} onPress={() => { navigation.navigate('SignUpAddress') }} />
             </View>
         </View>
     )
