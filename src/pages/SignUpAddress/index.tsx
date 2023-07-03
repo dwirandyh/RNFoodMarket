@@ -20,7 +20,7 @@ const SignUpAddress = ({ navigation }: Props) => {
                 <Gap height={16} />
                 <Select text='City' items={['Jakarta', 'Bandung', 'Surabaya', 'Lampung']} />
                 <Gap height={16} />
-                <Button text='Sign Up Now' type={ButtonType.Primary} onPress={() => { }} />
+                <Button text='Sign Up Now' type={ButtonType.Primary} onPress={() => { navigation.navigate('SignUpSuccess') }} />
             </View>
         </View>
     )

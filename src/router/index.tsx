@@ -3,12 +3,14 @@ import React from "react"
 import { SignIn, SplashScreen } from "../pages"
 import SignUp from "../pages/SignUp";
 import SignUpAddress from "../pages/SignUpAddress";
+import SignUpSuccess from "../pages/SignUpSuccess";
 
 export type RootStackParamList = {
     SplashScreen: undefined
     SignIn: undefined
     SignUp: undefined
     SignUpAddress: undefined
+    SignUpSuccess: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -19,6 +21,7 @@ const Router = () => {
             <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
             <Stack.Screen name="SignUpAddress" component={SignUpAddress} options={{ headerShown: false }} />
+            <Stack.Screen name="SignUpSuccess" component={SignUpSuccess} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }
