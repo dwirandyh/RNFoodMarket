@@ -1,6 +1,6 @@
 import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { FoodDummy1, IcStar, IcStarOff } from '../../../assets'
+import { IcStar, IcStarOff } from '../../../assets'
 import { Gap } from '../../atoms'
 
 type Props = {
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         elevation: 14,
         overflow: 'hidden',
         marginRight: 24,
+        marginBottom: 24,
     },
     image: {
         width: 200,

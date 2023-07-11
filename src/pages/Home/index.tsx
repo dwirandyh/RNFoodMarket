@@ -1,22 +1,69 @@
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, useWindowDimensions, SafeAreaView } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { FoodDummy1, FoodDummy2, FoodDummy3, ProfileDummy } from '../../assets'
 import { FoodCard } from '../../components'
+import { TabView, SceneMap, TabBar, SceneRendererProps, NavigationState, Route } from 'react-native-tab-view'
+
+
+
+const FirstRoute = () => (
+    <View style={{ flex: 1, backgroundColor: 'white' }} />
+);
+
+const SecondRoute = () => (
+    <View style={{ flex: 1, backgroundColor: 'white' }} />
+);
+
+const renderScene = SceneMap({
+    newTaste: FirstRoute,
+    popular: SecondRoute,
+    recommended: SecondRoute,
+});
+
+
+const renderTabBar = (props: SceneRendererProps & { navigationState: NavigationState<Route> }) => (
+    <TabBar
+        {...props}
+        indicatorStyle={{ backgroundColor: '#020202', height: 3, width: '0.1%', marginBottom: -3, marginLeft: 4, }}
+        style={{
+            backgroundColor: 'white', borderBottomColor: '#F2F2F2',
+            borderBottomWidth: 1,
+        }}
+        tabStyle={{ width: 'auto' }}
+        renderLabel={({ route, focused, color }) => (
+            <View style={{ marginLeft: 10 }}>
+                <Text style={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: focused ? '#020202' : '#8D92A3' }}>
+                    {route.title}
+                </Text>
+            </View>
+
+        )}
+    />
+);
+
 
 type Props = {}
 
 const Home = (props: Props) => {
+    const layout = useWindowDimensions();
+
+    const [index, setIndex] = React.useState(0);
+    const [routes] = React.useState([
+        { key: 'newTaste', title: 'New Taste' },
+        { key: 'popular', title: 'Popular' },
+        { key: 'recommended', title: 'Recommended' }
+    ]);
+
     return (
-        <SafeAreaView>
-            <View>
-                <View style={styles.profileContainer}>
-                    <View>
-                        <Text style={styles.title}>FoodMarket</Text>
-                        <Text style={styles.subtitle}>Let’s get some foods</Text>
-                    </View>
-                    <Image source={ProfileDummy} style={styles.photoProfile} />
+        <SafeAreaView style={styles.page}>
+            <View style={styles.profileContainer}>
+                <View>
+                    <Text style={styles.title}>FoodMarket</Text>
+                    <Text style={styles.subtitle}>Let’s get some foods</Text>
                 </View>
+                <Image source={ProfileDummy} style={styles.photoProfile} />
+            </View>
+            <View>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <View style={styles.foodCardContainer}>
                         <FoodCard image={FoodDummy1} />
@@ -25,6 +72,15 @@ const Home = (props: Props) => {
                     </View>
                 </ScrollView>
             </View>
+            <View style={styles.tabContainer}>
+                <TabView
+                    navigationState={{ index, routes }}
+                    renderScene={renderScene}
+                    onIndexChange={setIndex}
+                    renderTabBar={renderTabBar}
+                    initialLayout={{ width: layout.width }}
+                />
+            </View>
         </SafeAreaView>
     )
 }
@@ -32,7 +88,11 @@ const Home = (props: Props) => {
 export default Home
 
 const styles = StyleSheet.create({
+    page: {
+        flex: 1,
+    },
     profileContainer: {
+        backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -58,5 +118,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 24,
         marginLeft: 24,
+    },
+    tabContainer: {
+        flex: 1,
     }
 })
