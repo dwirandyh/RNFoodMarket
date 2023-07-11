@@ -1,14 +1,14 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import React from "react"
-import { SignIn, SplashScreen } from "../pages"
+import { Home, SignIn, SplashScreen } from "../pages"
 import SignUp from "../pages/SignUp";
 import SignUpAddress from "../pages/SignUpAddress";
 import SignUpSuccess from "../pages/SignUpSuccess";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import Order from "../pages/Order";
 import { BottomNavigator } from "../components";
+import { SafeAreaView } from "react-native";
 
 export type RootStackParamList = {
     SplashScreen: undefined
@@ -30,11 +30,13 @@ const Tab = createBottomTabNavigator<TabNavigatorParamList>()
 
 const MainApp = () => {
     return (
-        <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-            <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
-            <Tab.Screen name="Order" component={Order} options={{ headerShown: false }} />
-            <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
-        </Tab.Navigator>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+            <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
+                <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                <Tab.Screen name="Order" component={Order} options={{ headerShown: false }} />
+                <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+            </Tab.Navigator>
+        </SafeAreaView>
     )
 }
 

@@ -31,7 +31,7 @@ const BottomNavigator = ({ state, descriptors, navigation }: Props) => {
             backgroundColor: 'white',
             flexDirection: 'row',
             paddingTop: 12,
-            paddingBottom: 8,
+            paddingBottom: 2,
             paddingHorizontal: 10,
             justifyContent: 'space-between',
         }}>
@@ -73,8 +73,8 @@ const BottomNavigator = ({ state, descriptors, navigation }: Props) => {
                         style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
                     >
                         <TabIcon title={label} isFocused={isFocused} />
-                        <Gap height={4} />
-                        <Text style={{ textAlign: 'center' }}>{label}</Text>
+                        <Gap height={2} />
+                        <Text style={{ textAlign: 'center', color: isFocused ? '#FFC700' : '#E2E2E2' }}>{label}</Text>
                     </TouchableOpacity>
                 );
             })}

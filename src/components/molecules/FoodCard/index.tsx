@@ -2,6 +2,7 @@ import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native
 import React from 'react'
 import { IcStar, IcStarOff } from '../../../assets'
 import { Gap } from '../../atoms'
+import Rating from '../Rating'
 
 type Props = {
     image: ImageSourcePropType,
@@ -14,15 +15,7 @@ const FoodCard = ({ image }: Props) => {
             <View style={styles.content}>
                 <Text style={styles.text}>Cherry Healthy</Text>
                 <Gap height={6} />
-                <View style={styles.ratingContainer}>
-                    <IcStar />
-                    <IcStar />
-                    <IcStar />
-                    <IcStar />
-                    <IcStarOff />
-                    <Gap width={4} />
-                    <Text>4.5</Text>
-                </View>
+                <Rating />
             </View>
         </View>
     )
@@ -58,5 +51,10 @@ const styles = StyleSheet.create({
     },
     ratingContainer: {
         flexDirection: 'row',
+    },
+    ratingText: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 12,
+        color: '#8D92A3'
     }
 })
