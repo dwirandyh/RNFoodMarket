@@ -2,10 +2,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { IlSuccessSignUp } from '../../assets'
 import { Button, ButtonType, Gap } from '../../components'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../../router'
 
-type Props = {}
+type Props = NativeStackScreenProps<RootStackParamList>
 
-const SignUpSuccess = (props: Props) => {
+const SignUpSuccess = ({ navigation }: Props) => {
     return (
         <View style={styles.page}>
             <IlSuccessSignUp style={styles.illustration} />
@@ -15,7 +17,7 @@ const SignUpSuccess = (props: Props) => {
                 <Gap height={6} />
                 <Text style={styles.subtitle}>Now you are able to order some foods as a self-reward</Text>
                 <Gap height={30} />
-                <Button text='Find Foods' type={ButtonType.Primary} onPress={() => { }} />
+                <Button text='Find Foods' type={ButtonType.Primary} onPress={() => { navigation.replace('MainApp') }} />
             </View>
         </View>
     )
