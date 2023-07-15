@@ -1,90 +1,81 @@
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
-import React from 'react'
-import { TabView, SceneMap, TabBar, SceneRendererProps, NavigationState, Route } from 'react-native-tab-view'
-import FoodListItem from '../FoodListItem';
+import React, { useCallback } from 'react'
+import { View, StyleSheet, ListRenderItem, Text } from 'react-native'
+import { MaterialTabBar, TabBarProps, TabItemProps, Tabs } from 'react-native-collapsible-tab-view'
+import { TabName } from 'react-native-collapsible-tab-view/lib/typescript/src/types'
+import HomeTabItem from '../HomeTabItem'
 
+const HEADER_HEIGHT = 250
 
+const DATA = [0, 1, 2, 3, 4]
+const identity = (v: unknown): string => v + ''
 
-const NewTeste = () => (
-    <View style={styles.tabItemContainer}>
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-    </View>
-);
+const Header = () => {
+    return <View style={styles.header} />
+}
 
-const Popular = () => (
-    <View style={styles.tabItemContainer}>
+type Props = {
+    header: ((props: TabBarProps<string>) => React.ReactElement<any, string>)
+}
 
-    </View>
-);
+const HomeTabSection = ({ header }: Props) => {
+    const renderItem: ListRenderItem<number> = React.useCallback(({ index }) => {
+        return (
+            <View style={[styles.box, index % 2 === 0 ? styles.boxB : styles.boxA]} />
+        )
+    }, [])
 
-const Recommended = () => (
-    <View style={styles.tabItemContainer}>
-
-    </View>
-);
-
-const renderScene = SceneMap({
-    newTaste: NewTeste,
-    popular: Popular,
-    recommended: Recommended,
-});
-
-
-const renderTabBar = (props: SceneRendererProps & { navigationState: NavigationState<Route> }) => (
-    <TabBar
-        {...props}
-        indicatorStyle={{ backgroundColor: '#020202', height: 3, width: '0.1%', marginBottom: -3, marginLeft: 4, }}
-        style={{
-            backgroundColor: 'white', borderBottomColor: '#F2F2F2',
-            borderBottomWidth: 1,
-        }}
-        tabStyle={{ width: 'auto' }}
-        renderLabel={({ route, focused, color }) => (
-            <View style={{ marginLeft: 10 }}>
-                <Text style={{ fontFamily: 'Poppins-Medium', fontSize: 14, color: focused ? '#020202' : '#8D92A3' }}>
-                    {route.title}
-                </Text>
-            </View>
-
-        )}
-    />
-);
-
-type Props = {}
-
-const HomeTabSection = (props: Props) => {
-
-    const layout = useWindowDimensions();
-
-    const [index, setIndex] = React.useState(0);
-    const [routes] = React.useState([
-        { key: 'newTaste', title: 'New Taste' },
-        { key: 'popular', title: 'Popular' },
-        { key: 'recommended', title: 'Recommended' }
-    ]);
+    const makeLabel = useCallback(
+        <T extends TabName>(label: string) => (props: TabItemProps<T>) => (
+            <HomeTabItem
+                index={props.index}
+                indexDecimal={props.indexDecimal}
+                label={label}
+            />
+        ),
+        []
+    )
 
     return (
-        <TabView
-            navigationState={{ index, routes }
-            }
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            renderTabBar={renderTabBar}
-            initialLayout={{ width: layout.width }}
-            style={{ height: 100 }}
-        />
+        <Tabs.Container renderHeader={header} renderTabBar={(props) => <MaterialTabBar {...props} scrollEnabled />}>
+            <Tabs.Tab name="New Teste" label={makeLabel('New Teste')}>
+                <Tabs.FlatList
+                    data={DATA}
+                    renderItem={renderItem}
+                    keyExtractor={identity}
+                />
+            </Tabs.Tab>
+            <Tabs.Tab name="Popular" label={makeLabel('Popular')}>
+                <Tabs.ScrollView>
+                    <View style={[styles.box, styles.boxA]} />
+                    <View style={[styles.box, styles.boxB]} />
+                </Tabs.ScrollView>
+            </Tabs.Tab>
+            <Tabs.Tab name="Recommended" label={makeLabel('Recommended')}>
+                <Tabs.ScrollView>
+                    <View style={[styles.box, styles.boxA]} />
+                    <View style={[styles.box, styles.boxB]} />
+                </Tabs.ScrollView>
+            </Tabs.Tab>
+        </Tabs.Container>
     )
 }
 
-export default HomeTabSection
-
 const styles = StyleSheet.create({
-    tabItemContainer: {
+    box: {
+        height: 250,
+        width: '100%',
+    },
+    boxA: {
         backgroundColor: 'white',
-        paddingHorizontal: 24,
-        paddingTop: 17
-    }
+    },
+    boxB: {
+        backgroundColor: '#D8D8D8',
+    },
+    header: {
+        height: HEADER_HEIGHT,
+        width: '100%',
+        backgroundColor: '#2196f3',
+    },
 })
+
+export default HomeTabSection
