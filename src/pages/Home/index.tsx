@@ -6,11 +6,12 @@ import { FoodCard, HomeProfile, HomeTabSection } from '../../components'
 type Props = {}
 
 const Home = (props: Props) => {
-    const header = () => {
-        return (
-            <View>
+    return (
+        // <SafeAreaView>
+        <ScrollView>
+            <View style={styles.page}>
                 <HomeProfile />
-                <View style={{ backgroundColor: '#FAFAFC' }}>
+                <View>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                         <View style={styles.foodCardContainer}>
                             <FoodCard image={FoodDummy1} />
@@ -19,11 +20,12 @@ const Home = (props: Props) => {
                         </View>
                     </ScrollView>
                 </View>
+                <View style={{ flex: 1 }}>
+                    <HomeTabSection />
+                </View>
             </View>
-        )
-    }
-    return (
-        <HomeTabSection header={header} />
+        </ScrollView>
+        // </SafeAreaView>
     )
 }
 
