@@ -16,13 +16,19 @@ const NewTeste = () => (
 
 const Popular = () => (
     <View style={styles.tabItemContainer}>
-
+        <FoodListItem />
+        <FoodListItem />
+        <FoodListItem />
+        <FoodListItem />
     </View>
 );
 
 const Recommended = () => (
     <View style={styles.tabItemContainer}>
-
+        <FoodListItem />
+        <FoodListItem />
+        <FoodListItem />
+        <FoodListItem />
     </View>
 );
 
@@ -74,7 +80,7 @@ const HomeTabSection = (props: Props) => {
             onIndexChange={setIndex}
             renderTabBar={renderTabBar}
             initialLayout={{ width: layout.width }}
-            style={{ height: 100 }}
+            style={{ height: 360 }}
         />
     )
 }
