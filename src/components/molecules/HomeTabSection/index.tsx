@@ -1,24 +1,66 @@
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { TabView, SceneMap, TabBar, SceneRendererProps, NavigationState, Route } from 'react-native-tab-view'
 import FoodListItem from '../FoodListItem';
+import FirstRoute from '../FirstTabRoute';
 
 
 
-const NewTeste = () => (
-    <View style={styles.tabItemContainer}>
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-    </View>
-);
+const NewTeste = React.forwardRef(({ route }: any, ref) => {
+    var contentHeight: number = 0
 
-const Popular = () => (
-    <View style={styles.tabItemContainer}>
+    const handleLayout = (event: any) => {
+        if (event) {
+            const { height } = event.nativeEvent.layout;
+            contentHeight = height
+            route.onHeightUpdate(height)
+        }
+        else if (contentHeight > 0) {
+            route.onHeightUpdate(contentHeight)
+        }
+    };
 
-    </View>
-);
+    React.useImperativeHandle(route.ref, () => ({
+        handleLayout,
+    }));
+
+    return (
+        <View style={styles.tabItemContainer} onLayout={handleLayout} >
+            <FoodListItem />
+            <FoodListItem />
+            <FoodListItem />
+            <FoodListItem />
+        </View >)
+})
+
+const Popular = React.forwardRef(({ route }: any, ref) => {
+    var contentHeight: number = 0
+
+    const handleLayout = (event: any) => {
+        if (event) {
+            const { height } = event.nativeEvent.layout;
+            contentHeight = height
+            route.onHeightUpdate(height)
+        }
+        else if (contentHeight > 0) {
+            route.onHeightUpdate(contentHeight)
+        }
+    };
+
+    React.useImperativeHandle(route.ref, () => ({
+        handleLayout,
+    }));
+
+    return (
+        <View style={styles.tabItemContainer} onLayout={handleLayout} >
+            <FoodListItem />
+            <FoodListItem />
+            <FoodListItem />
+            <FoodListItem />
+            <FoodListItem />
+            <FoodListItem />
+        </View >)
+})
 
 const Recommended = () => (
     <View style={styles.tabItemContainer}>
@@ -60,21 +102,43 @@ const HomeTabSection = (props: Props) => {
     const layout = useWindowDimensions();
 
     const [index, setIndex] = React.useState(0);
+
+    const [tabHeight, setTabHeight] = useState(80)
+    const updateTabHeight = (newValue: number) => {
+        const finalTabHeight = 50 + newValue
+        console.log("updateTabHeight " + finalTabHeight)
+        setTabHeight(finalTabHeight)
+    }
+
+    const firstRouteRef = useRef<any>(null);
+    const secondRouteRef = useRef<any>(null);
+
     const [routes] = React.useState([
-        { key: 'newTaste', title: 'New Taste' },
-        { key: 'popular', title: 'Popular' },
+        { key: 'newTaste', title: 'New Taste', onHeightUpdate: updateTabHeight, ref: firstRouteRef },
+        { key: 'popular', title: 'Popular', onHeightUpdate: updateTabHeight, ref: secondRouteRef },
         { key: 'recommended', title: 'Recommended' }
     ]);
 
+    const handleIndexChange = (index: number) => {
+        setIndex(index)
+
+        console.log(index)
+        if (index === 0) {
+            firstRouteRef.current.handleLayout()
+        }
+        else if (index === 1) {
+            secondRouteRef.current.handleLayout()
+        }
+    }
+
     return (
         <TabView
-            navigationState={{ index, routes }
-            }
+            navigationState={{ index, routes }}
             renderScene={renderScene}
-            onIndexChange={setIndex}
+            onIndexChange={handleIndexChange}
             renderTabBar={renderTabBar}
             initialLayout={{ width: layout.width }}
-            style={{ height: 100 }}
+            style={{ height: tabHeight }}
         />
     )
 }
