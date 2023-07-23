@@ -7,11 +7,10 @@ import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-naviga
 import { RootStackParamList } from '../../../router';
 
 
-type TabItemProps = {
-    navigation: NativeStackNavigationProp<RootStackParamList>
-}
+type navigationProp = NativeStackNavigationProp<RootStackParamList>
 
-const NewTeste = ({ navigation }: TabItemProps) => {
+const NewTeste = () => {
+    const navigation = useNavigation<navigationProp>()
     return (
         <View style={styles.tabItemContainer}>
             <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
@@ -22,7 +21,8 @@ const NewTeste = ({ navigation }: TabItemProps) => {
     )
 }
 
-const Popular = ({ navigation }: TabItemProps) => {
+const Popular = () => {
+    const navigation = useNavigation<navigationProp>()
     return (
         < View style={styles.tabItemContainer} >
             <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
@@ -33,7 +33,8 @@ const Popular = ({ navigation }: TabItemProps) => {
     )
 };
 
-const Recommended = ({ navigation }: TabItemProps) => {
+const Recommended = () => {
+    const navigation = useNavigation<navigationProp>()
     return (
         <View style={styles.tabItemContainer}>
             <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
@@ -44,6 +45,11 @@ const Recommended = ({ navigation }: TabItemProps) => {
     )
 }
 
+const renderScene = SceneMap({
+    newTaste: NewTeste,
+    popular: Popular,
+    recommended: Recommended,
+});
 
 const renderTabBar = (props: SceneRendererProps & { navigationState: NavigationState<Route> }) => (
     <TabBar
@@ -65,9 +71,11 @@ const renderTabBar = (props: SceneRendererProps & { navigationState: NavigationS
     />
 );
 
-type Props = NativeStackScreenProps<RootStackParamList>
+type Props = {
 
-const HomeTabSection = ({ navigation }: Props) => {
+}
+
+const HomeTabSection = (props: Props) => {
 
     const layout = useWindowDimensions();
 
@@ -77,19 +85,6 @@ const HomeTabSection = ({ navigation }: Props) => {
         { key: 'popular', title: 'Popular' },
         { key: 'recommended', title: 'Recommended' }
     ]);
-
-    const renderScene = (props: SceneRendererProps & { route: Route }) => {
-        switch (props.route.key) {
-            case 'newTaste':
-                return <NewTeste navigation={navigation} />
-            case 'popular':
-                return <Popular navigation={navigation} />
-            case 'recommended':
-                return <Recommended navigation={navigation} />
-            default:
-                return <View />
-        }
-    }
 
     return (
         <TabView

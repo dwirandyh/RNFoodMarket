@@ -1,4 +1,7 @@
 import IcBack from './ic_back.svg'
+import IcBackWhite from './ic_back_white.svg'
+import IcButtonPlus from './ic_button_plus.svg'
+import IcButtonMinus from './ic_button_minus.svg'
 import IcChevronDown from './ic_chevron_down.svg'
 import IcHome from './ic_home.svg'
 import IcHomeActive from './ic_home_active.svg'
@@ -9,4 +12,4 @@ import IcProfileActive from './ic_profile_active.svg'
 import IcStar from './ic_star.svg'
 import IcStarOff from './ic_star_off.svg'
 
-export { IcBack, IcChevronDown, IcHome, IcHomeActive, IcOrder, IcOrderActive, IcProfile, IcProfileActive, IcStar, IcStarOff }
+export { IcBack, IcBackWhite, IcButtonPlus, IcButtonMinus, IcChevronDown, IcHome, IcHomeActive, IcOrder, IcOrderActive, IcProfile, IcProfileActive, IcStar, IcStarOff }

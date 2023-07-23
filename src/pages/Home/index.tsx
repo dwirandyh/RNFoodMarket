@@ -22,7 +22,7 @@ const Home = (props: Props) => {
                     </ScrollView>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <HomeTabSection {...props} />
+                    <HomeTabSection />
                 </View>
             </View>
         </ScrollView>
