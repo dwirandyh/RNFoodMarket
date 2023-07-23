@@ -2,12 +2,13 @@ import { StyleSheet, Text, View, Image, ScrollView, useWindowDimensions, SafeAre
 import React from 'react'
 import { FoodDummy1, FoodDummy2, FoodDummy3, ProfileDummy } from '../../assets'
 import { FoodCard, HomeProfile, HomeTabSection } from '../../components'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../../router'
 
-type Props = {}
+type Props = NativeStackScreenProps<RootStackParamList>
 
 const Home = (props: Props) => {
     return (
-        // <SafeAreaView>
         <ScrollView>
             <View style={styles.page}>
                 <HomeProfile />
@@ -21,11 +22,10 @@ const Home = (props: Props) => {
                     </ScrollView>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <HomeTabSection />
+                    <HomeTabSection {...props} />
                 </View>
             </View>
         </ScrollView>
-        // </SafeAreaView>
     )
 }
 

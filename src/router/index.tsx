@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import React from "react"
-import { Home, SignIn, SplashScreen } from "../pages"
+import { FoodDetail, Home, SignIn, SplashScreen } from "../pages"
 import SignUp from "../pages/SignUp";
 import SignUpAddress from "../pages/SignUpAddress";
 import SignUpSuccess from "../pages/SignUpSuccess";
@@ -17,6 +17,7 @@ export type RootStackParamList = {
     SignUpAddress: undefined
     SignUpSuccess: undefined
     MainApp: undefined
+    FoodDetail: undefined
 };
 
 type TabNavigatorParamList = {
@@ -49,6 +50,7 @@ const Router = () => {
             <Stack.Screen name="SignUpAddress" component={SignUpAddress} options={{ headerShown: false }} />
             <Stack.Screen name="SignUpSuccess" component={SignUpSuccess} options={{ headerShown: false }} />
             <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }} />
+            <Stack.Screen name="FoodDetail" component={FoodDetail} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

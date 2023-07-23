@@ -1,22 +1,26 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { FoodDummy1, IcStar, IcStarOff } from '../../../assets'
 import { Gap } from '../../atoms'
 import Rating from '../Rating'
 
-type Props = {}
+type Props = {
+    onPress: () => void
+}
 
-const FoodListItem = (props: Props) => {
+const FoodListItem = ({ onPress }: Props) => {
     return (
-        <View style={styles.container}>
-            <Image source={FoodDummy1} style={styles.image} />
-            <Gap width={12} />
-            <View style={{ flex: 1 }}>
-                <Text style={styles.foodTitle}>Soup Bumil</Text>
-                <Text style={styles.foodPrice}>IDR 289.000</Text>
+        <TouchableOpacity onPress={onPress}>
+            <View style={styles.container}>
+                <Image source={FoodDummy1} style={styles.image} />
+                <Gap width={12} />
+                <View style={{ flex: 1 }}>
+                    <Text style={styles.foodTitle}>Soup Bumil</Text>
+                    <Text style={styles.foodPrice}>IDR 289.000</Text>
+                </View>
+                <Rating />
             </View>
-            <Rating />
-        </View>
+        </TouchableOpacity>
     )
 }
 

@@ -2,41 +2,47 @@ import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
 import React from 'react'
 import { TabView, SceneMap, TabBar, SceneRendererProps, NavigationState, Route } from 'react-native-tab-view'
 import FoodListItem from '../FoodListItem';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../router';
 
 
+type TabItemProps = {
+    navigation: NativeStackNavigationProp<RootStackParamList>
+}
 
-const NewTeste = () => (
-    <View style={styles.tabItemContainer}>
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-    </View>
-);
+const NewTeste = ({ navigation }: TabItemProps) => {
+    return (
+        <View style={styles.tabItemContainer}>
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+        </View>
+    )
+}
 
-const Popular = () => (
-    <View style={styles.tabItemContainer}>
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-    </View>
-);
+const Popular = ({ navigation }: TabItemProps) => {
+    return (
+        < View style={styles.tabItemContainer} >
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+        </View >
+    )
+};
 
-const Recommended = () => (
-    <View style={styles.tabItemContainer}>
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-        <FoodListItem />
-    </View>
-);
-
-const renderScene = SceneMap({
-    newTaste: NewTeste,
-    popular: Popular,
-    recommended: Recommended,
-});
+const Recommended = ({ navigation }: TabItemProps) => {
+    return (
+        <View style={styles.tabItemContainer}>
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+        </View>
+    )
+}
 
 
 const renderTabBar = (props: SceneRendererProps & { navigationState: NavigationState<Route> }) => (
@@ -59,9 +65,9 @@ const renderTabBar = (props: SceneRendererProps & { navigationState: NavigationS
     />
 );
 
-type Props = {}
+type Props = NativeStackScreenProps<RootStackParamList>
 
-const HomeTabSection = (props: Props) => {
+const HomeTabSection = ({ navigation }: Props) => {
 
     const layout = useWindowDimensions();
 
@@ -71,6 +77,19 @@ const HomeTabSection = (props: Props) => {
         { key: 'popular', title: 'Popular' },
         { key: 'recommended', title: 'Recommended' }
     ]);
+
+    const renderScene = (props: SceneRendererProps & { route: Route }) => {
+        switch (props.route.key) {
+            case 'newTaste':
+                return <NewTeste navigation={navigation} />
+            case 'popular':
+                return <Popular navigation={navigation} />
+            case 'recommended':
+                return <Recommended navigation={navigation} />
+            default:
+                return <View />
+        }
+    }
 
     return (
         <TabView
