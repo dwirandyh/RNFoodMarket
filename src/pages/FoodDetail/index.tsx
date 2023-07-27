@@ -2,14 +2,18 @@ import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react
 import React from 'react'
 import { FoodDummy1, IcBackWhite, IcButtonMinus, IcButtonPlus } from '../../assets'
 import { Button, ButtonType, Gap, Rating } from '../../components'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../../router'
 
-type Props = {}
+type Props = NativeStackScreenProps<RootStackParamList>
 
-const FoodDetail = (props: Props) => {
+const FoodDetail = ({ navigation }: Props) => {
     return (
         <View style={styles.page}>
             <ImageBackground source={FoodDummy1} style={styles.cover}>
-                <IcBackWhite />
+                <TouchableOpacity activeOpacity={0.7} onPress={() => { navigation.pop() }}>
+                    <IcBackWhite />
+                </TouchableOpacity>
             </ImageBackground>
             <View style={styles.foodContainer}>
                 <View style={styles.mainContent}>
@@ -54,7 +58,7 @@ const FoodDetail = (props: Props) => {
                             <Text style={styles.price}>IDR 12.289.000</Text>
                         </View>
                         <View style={styles.orderButton}>
-                            <Button text='Order Now' type={ButtonType.Primary} onPress={() => { }} />
+                            <Button text='Order Now' type={ButtonType.Primary} onPress={() => { navigation.navigate('OrderSummary') }} />
                         </View>
                     </View>
                 </View>
