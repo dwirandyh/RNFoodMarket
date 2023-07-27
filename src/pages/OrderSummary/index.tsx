@@ -14,7 +14,7 @@ const OrderSummary = ({ navigation }: Props) => {
                 <Gap height={24} />
                 <FoodOrderSummary />
                 <View style={styles.checkoutContainer}>
-                    <Button text='Checkout Now' type={ButtonType.Primary} onPress={() => { }} />
+                    <Button text='Checkout Now' type={ButtonType.Primary} onPress={() => { navigation.navigate('SuccessOrder') }} />
                 </View>
             </ScrollView>
         </View>
