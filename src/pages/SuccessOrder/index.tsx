@@ -2,10 +2,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Button, ButtonType, Gap } from '../../components'
 import { IlSuccessOrder } from '../../assets'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../../router'
 
-type Props = {}
+type Props = NativeStackScreenProps<RootStackParamList>
 
-const SuccessOrder = (props: Props) => {
+const SuccessOrder = ({ navigation, route, }: Props) => {
     return (
         <View style={styles.page}>
             <IlSuccessOrder style={styles.icon} />
@@ -14,7 +16,7 @@ const SuccessOrder = (props: Props) => {
                 preparing your best foods</Text>
             <Button text='Order Other Foods' type={ButtonType.Primary} onPress={() => { }} />
             <Gap height={14} />
-            <Button text='View My Order' type={ButtonType.Secondary} onPress={() => { }} />
+            <Button text='View My Order' type={ButtonType.Secondary} onPress={() => { navigation.replace('MainApp', { screen: 'Order' }) }} />
         </View>
     )
 }
@@ -29,7 +31,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         width: 200,
-        height: 176
+        height: 176,
+        marginBottom: 30,
     },
     title: {
         color: '#020202',
