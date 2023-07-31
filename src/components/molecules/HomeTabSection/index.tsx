@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { TabView, SceneMap, TabBar, SceneRendererProps, NavigationState, Route } from 'react-native-tab-view'
 import FoodListItem from '../FoodListItem';
 import { useNavigation } from '@react-navigation/native';
@@ -77,10 +77,10 @@ type Props = {
 
 const HomeTabSection = (props: Props) => {
 
-    const layout = useWindowDimensions();
+    const layout = useWindowDimensions()
 
-    const [index, setIndex] = React.useState(0);
-    const [routes] = React.useState([
+    const [index, setIndex] = useState(0)
+    const [routes] = useState([
         { key: 'newTaste', title: 'New Taste' },
         { key: 'popular', title: 'Popular' },
         { key: 'recommended', title: 'Recommended' }
