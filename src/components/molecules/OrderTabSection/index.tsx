@@ -51,7 +51,7 @@ const renderScene = SceneMap({
 const renderTabBar = (props: SceneRendererProps & { navigationState: NavigationState<Route> }) => (
     <TabBar
         {...props}
-        indicatorStyle={{ backgroundColor: '#020202', height: 3, width: '0.1%', marginBottom: -3, marginLeft: 4, }}
+        indicatorStyle={{ backgroundColor: '#020202', height: 3, width: '0.2%', marginBottom: -3, marginLeft: 4, }}
         style={{
             backgroundColor: 'white', borderBottomColor: '#F2F2F2',
             borderBottomWidth: 1,
