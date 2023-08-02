@@ -1,21 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { FoodDummy2 } from '../../../assets'
-import { Button, ButtonType, Gap } from '../../atoms'
-
-type DetailLabelProps = {
-    text: string,
-    value: string,
-    valueColor?: string
-}
-const DetailLabel = ({ text, value, valueColor }: DetailLabelProps) => {
-    return (
-        <View style={styles.detailLabelContainer}>
-            <Text style={styles.detailLabelText}>{text}</Text>
-            <Text style={[styles.detailLabelValue, { color: valueColor }]}>{value}</Text>
-        </View>
-    )
-}
+import { Button, ButtonType, DetailLabel, Gap } from '../../atoms'
 
 type Props = {}
 
@@ -70,12 +56,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    detailLabelContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: 6
-    },
-
     label: {
         fontFamily: 'Poppins-Regular',
         fontSize: 14,
@@ -95,17 +75,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         fontSize: 13,
         color: '#8D92A3',
-        textAlign: 'right'
-    },
-    detailLabelText: {
-        fontFamily: 'Poppins-Regular',
-        fontSize: 14,
-        color: '#8D92A3'
-    },
-    detailLabelValue: {
-        fontFamily: 'Poppins-Regular',
-        fontSize: 13,
-        color: '#020202',
         textAlign: 'right'
     },
 })

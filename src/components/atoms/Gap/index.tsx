@@ -1,16 +1,17 @@
-import { View } from 'react-native'
+import { DimensionValue, Dimensions, View } from 'react-native'
 import React from 'react'
 
 type Props = {
-    width?: number,
-    height?: number
+    width?: DimensionValue,
+    height?: number,
+    color?: string
 }
 
 const index = (props: Props) => {
-    const { width = 0, height = 0 } = props
+    const { width = 0, height = 0, color } = props
 
     return (
-        <View style={{ width: width, height: height }} />
+        <View style={{ width: width, height: height, backgroundColor: color }} />
     )
 }
 

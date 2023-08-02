@@ -5,13 +5,19 @@ import { Gap } from '../../atoms'
 import { NavigationState, Route, SceneMap, SceneRendererProps, TabBar, TabView } from 'react-native-tab-view'
 import FoodListItem from '../FoodListItem'
 import FoodListItemInProgress from '../FoodListItemInProgress'
-import FoodListItemPastOrder from '../FoodListItem copy'
+import FoodListItemPastOrder from '../FoodListItemPastOrder'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../../../router'
+
+type navigationProp = NativeStackNavigationProp<RootStackParamList>
 
 const OrderInProgress = () => {
+    const navigation = useNavigation<navigationProp>()
     return (
         <ScrollView style={styles.tabItemScrollView}>
             <View style={styles.tabItemContainer}>
-                <FoodListItemInProgress onPress={() => { }} />
+                <FoodListItemInProgress onPress={() => { navigation.navigate('OrderDetail') }} />
                 <FoodListItemInProgress onPress={() => { }} />
                 <FoodListItemInProgress onPress={() => { }} />
                 <FoodListItemInProgress onPress={() => { }} />
