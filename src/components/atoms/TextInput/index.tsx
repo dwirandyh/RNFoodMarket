@@ -1,18 +1,17 @@
-import { StyleSheet, Text, View, TextInput as RNTextInput } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TextInput as RNTextInput, TextInputProps } from 'react-native'
+import React, { ComponentPropsWithoutRef } from 'react'
 
 type Props = {
     text: string,
     placeholder: string
-}
+} & TextInputProps
 
-const TextInput = (props: Props) => {
-    const { text, placeholder } = props
+const TextInput = ({ text, placeholder, ...restProps }: Props) => {
     return (
         <View>
             <Text>{text}</Text>
             <View style={{ height: 6 }} />
-            <RNTextInput style={styles.textInput} placeholder={placeholder} />
+            <RNTextInput style={styles.textInput} {...restProps} />
         </View>
     )
 }
