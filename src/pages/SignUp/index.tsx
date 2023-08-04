@@ -3,10 +3,21 @@ import React from 'react'
 import { Button, ButtonType, Gap, Header, TextInput } from '../../components'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../router'
+import { useForm } from '../../utils'
+import { useDispatch } from 'react-redux'
+import { UserForm, userFilled } from '../../redux/slice/registration'
 
 type Props = NativeStackScreenProps<RootStackParamList>
 
 const SignUp = ({ navigation }: Props) => {
+    const [form, updateForm] = useForm<UserForm>({ name: '', email: '', password: '' })
+    const dispatch = useDispatch()
+
+    const onSubmit = () => {
+        console.log('submit SignUp')
+        dispatch(userFilled(form))
+    }
+
     return (
         <View style={styles.container}>
             <Header title='Sign Up' subtitle='Register and eat' onBack={() => { }} />
@@ -20,13 +31,13 @@ const SignUp = ({ navigation }: Props) => {
                     </View>
                 </View>
                 <Gap height={16} />
-                <TextInput text='Full Name' placeholder='Type your full name' />
+                <TextInput text='Full Name' placeholder='Type your full name' value={form.name} onChangeText={(value) => { updateForm('name', value) }} />
                 <Gap height={16} />
-                <TextInput text='Email Address' placeholder='Type your email address' />
+                <TextInput text='Email Address' placeholder='Type your email address' value={form.email} onChangeText={(value) => { updateForm('email', value) }} />
                 <Gap height={16} />
-                <TextInput text='Password' placeholder='Type your password' />
+                <TextInput text='Password' placeholder='Type your password' secureTextEntry={true} value={form.password} onChangeText={(value) => { updateForm('password', value) }} />
                 <Gap height={16} />
-                <Button text='Continue' type={ButtonType.Primary} onPress={() => { navigation.navigate('SignUpAddress') }} />
+                <Button text='Continue' type={ButtonType.Primary} onPress={onSubmit} />
             </View>
         </View>
     )

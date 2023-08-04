@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, View, SafeAreaView, Text } from 'react-native'
+import React from 'react'
 import { Button, ButtonType, Gap, Header, TextInput } from '../../components'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../router'
 import { useForm } from '../../utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { GlobalState, hideError, setError } from '../../redux/slice/global'
+import { RootState } from '../../redux/store'
 
 interface FormValues {
     email: string
@@ -13,11 +16,18 @@ interface FormValues {
 type Props = NativeStackScreenProps<RootStackParamList>
 
 const SignIn = ({ navigation }: Props) => {
+    const globalState = useSelector((state: RootState) => state.global)
     const [form, updateForm, resetForm] = useForm<FormValues>({ email: '', password: '' })
 
+    const dispatch = useDispatch()
+
     const onSubmit = () => {
-        console.log(form)
-        resetForm()
+        if (globalState.isError) {
+            dispatch(hideError())
+        }
+        else {
+            dispatch(setError('Show Error'))
+        }
     }
 
     return (
@@ -26,6 +36,7 @@ const SignIn = ({ navigation }: Props) => {
                 <Header title='Sign In' subtitle='Find your best ever meal' />
                 <Gap height={16} />
                 <View style={styles.formContainer}>
+                    {globalState.isError == true && <Text>{globalState.message}</Text>}
                     <TextInput
                         text='Email Address'
                         placeholder='Type your email address'
