@@ -6,9 +6,10 @@ import { IcChevronDown } from '../../../assets'
 type Props = {
   text: string
   items: string[]
+  onSelect: ((text: string) => void)
 }
 
-const Select = ({ text, items }: Props) => {
+const Select = ({ text, items, onSelect }: Props) => {
   return (
     <View>
       <Text>{text}</Text>
@@ -17,7 +18,7 @@ const Select = ({ text, items }: Props) => {
         <SelectDropdown
           data={items}
           onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index)
+            onSelect(selectedItem)
           }}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected

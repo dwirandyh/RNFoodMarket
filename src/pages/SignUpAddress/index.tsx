@@ -1,28 +1,43 @@
-import { StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Gap, Header, TextInput, Button, ButtonType, Select } from '../../components'
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
 import { RootStackParamList } from '../../router'
+import { useForm } from '../../utils'
+import { UserAddressForm, userAddressFilled, userFilled } from '../../redux/slice/registration'
+import { useDispatch } from 'react-redux'
 
 type Props = NativeStackScreenProps<RootStackParamList>
 
 const SignUpAddress = ({ navigation }: Props) => {
+
+    const [form, updateForm] = useForm<UserAddressForm>({ phoneNumber: '', address: '', houseNumber: '', city: 'Jakarta' })
+    const dispatch = useDispatch()
+
+    const onSubmit = () => {
+        dispatch(userAddressFilled(form))
+    }
+
     return (
-        <View>
-            <Header title='Address' subtitle='Make sure it’s valid' onBack={() => { navigation.pop() }} />
-            <Gap height={24} />
-            <View style={styles.formContainer}>
-                <TextInput text='Phone No.' placeholder='Type your phone number' />
-                <Gap height={16} />
-                <TextInput text='Address' placeholder='Type your address' />
-                <Gap height={16} />
-                <TextInput text='House No.' placeholder='Type your house number' />
-                <Gap height={16} />
-                <Select text='City' items={['Jakarta', 'Bandung', 'Surabaya', 'Lampung']} />
-                <Gap height={16} />
-                <Button text='Sign Up Now' type={ButtonType.Primary} onPress={() => { navigation.navigate('SignUpSuccess') }} />
-            </View>
-        </View>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} enabled>
+            <ScrollView style={{ flexGrow: 1 }}>
+                <View>
+                    <Header title='Address' subtitle='Make sure it’s valid' onBack={() => { navigation.pop() }} />
+                    <Gap height={24} />
+                    <View style={styles.formContainer}>
+                        <TextInput text='Phone No.' placeholder='Type your phone number' value={form.phoneNumber} onChangeText={(value) => { updateForm('phoneNumber', value) }} />
+                        <Gap height={16} />
+                        <TextInput text='Address' placeholder='Type your address' value={form.address} onChangeText={(value) => { updateForm('address', value) }} />
+                        <Gap height={16} />
+                        <TextInput text='House No.' placeholder='Type your house number' value={form.houseNumber} onChangeText={(value) => { updateForm('houseNumber', value) }} />
+                        <Gap height={16} />
+                        <Select text='City' items={['Jakarta', 'Bandung', 'Surabaya', 'Lampung']} onSelect={(value) => { updateForm('city', value) }} />
+                        <Gap height={16} />
+                        <Button text='Sign Up Now' type={ButtonType.Primary} onPress={onSubmit} />
+                    </View>
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -33,5 +48,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingHorizontal: 24,
         paddingTop: 24,
+        paddingBottom: 24,
     }
 })

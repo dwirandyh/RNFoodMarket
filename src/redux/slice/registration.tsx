@@ -45,7 +45,7 @@ export const registrationSlice = createSlice({
             state.email = action.payload.email
             state.password = action.payload.password
         },
-        registerAddressRedurcer: (state, action: PayloadAction<UserAddressForm>) => {
+        userAddressFilled: (state, action: PayloadAction<UserAddressForm>) => {
             state.address = action.payload.address
             state.city = action.payload.city
             state.houseNumber = action.payload.houseNumber
@@ -54,5 +54,5 @@ export const registrationSlice = createSlice({
     },
 })
 
-export const { userFilled, registerAddressRedurcer } = registrationSlice.actions
+export const { userFilled, userAddressFilled } = registrationSlice.actions
 export default registrationSlice.reducer
