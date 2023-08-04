@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit"
-import auth from "./slice/registration"
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
 import global from "./slice/global"
 import registration from "./slice/registration"
+import createDebugger from "redux-flipper";
 
 const middlewares = [
     /* other middlewares */
@@ -9,7 +9,6 @@ const middlewares = [
 
 if (__DEV__) {
     const createDebugger = require("redux-flipper").default;
-    middlewares.push(createDebugger());
 }
 
 
@@ -20,8 +19,10 @@ export const store = configureStore({
         global: global
     },
     devTools: true,
-    middleware: middlewares
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(createDebugger())
 })
 
+// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch

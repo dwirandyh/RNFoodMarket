@@ -1,4 +1,5 @@
 import { CaseReducer, PayloadAction, createSlice } from "@reduxjs/toolkit"
+import sendRegistrationData from "../action/registerAction"
 
 
 export interface Registeration {
@@ -44,6 +45,7 @@ export const registrationSlice = createSlice({
             state.name = action.payload.name
             state.email = action.payload.email
             state.password = action.payload.password
+            state.password_confirmation = action.payload.password
         },
         userAddressFilled: (state, action: PayloadAction<UserAddressForm>) => {
             state.address = action.payload.address
@@ -52,6 +54,11 @@ export const registrationSlice = createSlice({
             state.phoneNumber = action.payload.phoneNumber
         }
     },
+    extraReducers: (builder) => {
+        builder.addCase(sendRegistrationData.fulfilled, (state, action) => {
+            state = initialStateRegister
+        })
+    }
 })
 
 export const { userFilled, userAddressFilled } = registrationSlice.actions

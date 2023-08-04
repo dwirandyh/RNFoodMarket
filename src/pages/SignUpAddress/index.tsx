@@ -5,17 +5,27 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/types
 import { RootStackParamList } from '../../router'
 import { useForm } from '../../utils'
 import { UserAddressForm, userAddressFilled, userFilled } from '../../redux/slice/registration'
-import { useDispatch } from 'react-redux'
+import { RootState, store } from '../../redux/store'
+import { useAppDispatch, useAppSelector } from '../../hook'
+import sendRegistrationData from '../../redux/action/registerAction'
 
 type Props = NativeStackScreenProps<RootStackParamList>
 
 const SignUpAddress = ({ navigation }: Props) => {
-
+    const registrationState = useAppSelector((state: RootState) => state.registration)
     const [form, updateForm] = useForm<UserAddressForm>({ phoneNumber: '', address: '', houseNumber: '', city: 'Jakarta' })
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const onSubmit = () => {
-        dispatch(userAddressFilled(form))
+    const onSubmit = async () => {
+        try {
+            dispatch(userAddressFilled(form))
+            await dispatch(sendRegistrationData()).unwrap()
+            navigation.navigate('SignUpSuccess')
+        }
+        catch (error) {
+            console.log(error)
+        }
+
     }
 
     return (
