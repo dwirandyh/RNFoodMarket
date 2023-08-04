@@ -6,7 +6,7 @@ import { RootState } from "../store";
 
 const sendRegistrationData = createAsyncThunk(
     '/register',
-    async (_, { getState }) => {
+    async (_, { getState, rejectWithValue }) => {
         try {
             const { registration } = getState() as RootState
             const url = API_HOST.url + "/register"
@@ -14,6 +14,9 @@ const sendRegistrationData = createAsyncThunk(
             return response.data
         }
         catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                return rejectWithValue(error.response.data)
+            }
             throw error
         }
     }

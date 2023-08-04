@@ -3,11 +3,13 @@ import React from 'react'
 import { Gap, Header, TextInput, Button, ButtonType, Select } from '../../components'
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
 import { RootStackParamList } from '../../router'
-import { useForm } from '../../utils'
+import { showToastMessage, useForm } from '../../utils'
 import { UserAddressForm, userAddressFilled, userFilled } from '../../redux/slice/registration'
 import { RootState, store } from '../../redux/store'
 import { useAppDispatch, useAppSelector } from '../../hook'
 import sendRegistrationData from '../../redux/action/registerAction'
+import axios, { AxiosError } from 'axios'
+import { err } from 'react-native-svg/lib/typescript/xml'
 
 type Props = NativeStackScreenProps<RootStackParamList>
 
@@ -20,12 +22,17 @@ const SignUpAddress = ({ navigation }: Props) => {
         try {
             dispatch(userAddressFilled(form))
             await dispatch(sendRegistrationData()).unwrap()
+            showToastMessage('Registration Success')
             navigation.navigate('SignUpSuccess')
         }
         catch (error) {
-            console.log(error)
+            if (error && typeof error === 'object' && 'message' in error) {
+                const errorMessage = error.message;
+                showToastMessage(errorMessage as string, 'danger')
+            } else {
+                showToastMessage('An error occurred', 'danger');
+            }
         }
-
     }
 
     return (
