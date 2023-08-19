@@ -67,9 +67,7 @@ export const registrationSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(sendRegistrationData.fulfilled, (state, action) => {
-            state = initialStateRegister
-        })
+        builder.addCase(sendRegistrationData.fulfilled, () => initialStateRegister)
     }
 })
 

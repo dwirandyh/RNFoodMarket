@@ -10,22 +10,27 @@ import { useAppDispatch, useAppSelector } from '../../hook'
 import sendRegistrationData from '../../redux/action/registerAction'
 import axios, { AxiosError } from 'axios'
 import { err } from 'react-native-svg/lib/typescript/xml'
+import { setLoading } from '../../redux/slice/global'
 
 type Props = NativeStackScreenProps<RootStackParamList>
 
 const SignUpAddress = ({ navigation }: Props) => {
-    const registrationState = useAppSelector((state: RootState) => state.registration)
     const [form, updateForm] = useForm<UserAddressForm>({ phoneNumber: '', address: '', houseNumber: '', city: 'Jakarta' })
     const dispatch = useAppDispatch()
 
     const onSubmit = async () => {
         try {
+            dispatch(setLoading(true))
             dispatch(userAddressFilled(form))
             await dispatch(sendRegistrationData()).unwrap()
+
+            dispatch(setLoading(false))
             showToastMessage('Registration Success')
             navigation.navigate('SignUpSuccess')
         }
         catch (error) {
+            dispatch(setLoading(false))
+
             if (error && typeof error === 'object' && 'message' in error) {
                 const errorMessage = error.message;
                 showToastMessage(errorMessage as string, 'danger')
@@ -33,6 +38,8 @@ const SignUpAddress = ({ navigation }: Props) => {
                 showToastMessage('An error occurred', 'danger');
             }
         }
+
+
     }
 
     return (

@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export interface GlobalState {
-    isError: boolean,
+    isError: boolean
     message: string
+    isLoading: boolean
 }
 
 const initialState: GlobalState = {
     isError: false,
-    message: ''
+    message: '',
+    isLoading: false
 }
 
 export const globalSlice = createSlice({
@@ -20,9 +22,12 @@ export const globalSlice = createSlice({
         },
         hideError: (state) => {
             state.isError = false
+        },
+        setLoading: (state, action: PayloadAction<boolean>) => {
+            state.isLoading = action.payload
         }
     }
 })
 
-export const { setError, hideError } = globalSlice.actions
+export const { setError, hideError, setLoading } = globalSlice.actions
 export default globalSlice.reducer

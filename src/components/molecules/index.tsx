@@ -10,6 +10,7 @@ import HomeProfile from "./HomeProfile";
 import ItemListMenu from "./ItemListMenu";
 import ProfileTabSection from "./ProfileTabSection";
 import Rating from "./Rating";
+import Loading from "./Loading";
 
 export {
     Header,
@@ -23,5 +24,6 @@ export {
     HomeProfile,
     ItemListMenu,
     ProfileTabSection,
-    Rating
+    Rating,
+    Loading
 };
