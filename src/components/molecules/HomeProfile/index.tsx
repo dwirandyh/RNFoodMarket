@@ -1,17 +1,31 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image, ImageURISource, ImageSourcePropType } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { ProfileDummy } from '../../../assets'
+import { getLocalData } from '../../../utils'
+import { UserModel } from '../../../model'
 
 type Props = {}
 
 const HomeProfile = (props: Props) => {
+    const [photo, setPhoto] = useState<ImageURISource>()
+
+    useEffect(() => {
+        getLocalData('loggedUser').then((res) => {
+            const user = res as UserModel
+            if (user) {
+                setPhoto({ uri: user.profilePhotoUrl })
+            }
+        })
+
+    }, [])
+
     return (
         <View style={styles.profileContainer}>
             <View>
                 <Text style={styles.title}>FoodMarket</Text>
                 <Text style={styles.subtitle}>Let’s get some foods</Text>
             </View>
-            <Image source={ProfileDummy} style={styles.photoProfile} />
+            {photo && <Image source={photo} style={styles.photoProfile} />}
         </View>
     )
 }

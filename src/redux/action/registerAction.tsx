@@ -3,12 +3,14 @@ import { PhotoData, Registeration } from "../slice/registration";
 import axios from "axios";
 import { API_HOST } from "../../config/api";
 import { RootState } from "../store";
+import { storeLocalData } from "../../utils";
+import { UserModel, Convert } from "../../model";
 
 const uploadPhoto = async (token: string, photo: PhotoData) => {
     const url = API_HOST.url + "/user/photo"
     const photoForm = new FormData()
     photoForm.append('file', photo)
-    await axios.post(url, photoForm,
+    const response = await axios.post(url, photoForm,
         {
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -16,6 +18,7 @@ const uploadPhoto = async (token: string, photo: PhotoData) => {
             }
         }
     )
+    return response.data
 }
 
 const sendRegistrationData = createAsyncThunk(
@@ -25,9 +28,17 @@ const sendRegistrationData = createAsyncThunk(
             const { registration } = getState() as RootState
             const url = API_HOST.url + "/register"
             const response = await axios.post(url, registration)
-            if (response.data.data.access_token) {
-                await uploadPhoto(response.data.data.access_token, registration.photo)
+
+            var userModel: UserModel = Convert.toUser(response.data.data.user)
+            var uploadedPhoto
+            if (response.data.data.access_token && registration.photo.name) {
+                uploadedPhoto = await uploadPhoto(response.data.data.access_token, registration.photo)
+                userModel.profilePhotoUrl = `${API_HOST.storage}/${uploadedPhoto.data[0]}`
+                storeLocalData('token', response.data.data.access_token)
             }
+
+            storeLocalData('loggedUser', userModel)
+
             return response.data
         }
         catch (error) {
