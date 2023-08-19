@@ -2,11 +2,18 @@ import { CaseReducer, PayloadAction, createSlice } from "@reduxjs/toolkit"
 import sendRegistrationData from "../action/registerAction"
 
 
+export interface PhotoData {
+    uri?: string,
+    type?: string,
+    name?: string
+}
+
 export interface Registeration {
     name: string
     email: string
     password: string
     password_confirmation: string
+    photo: PhotoData
     address: string
     city: string
     houseNumber: string
@@ -17,6 +24,7 @@ const initialStateRegister: Registeration = {
     name: '',
     email: '',
     password: '',
+    photo: {},
     password_confirmation: '',
     address: '',
     city: '',
@@ -24,10 +32,13 @@ const initialStateRegister: Registeration = {
     phoneNumber: '',
 }
 
+
+
 export interface UserForm {
     name: string
     email: string
     password: string
+    photo: PhotoData
 }
 
 export interface UserAddressForm {
@@ -46,6 +57,7 @@ export const registrationSlice = createSlice({
             state.email = action.payload.email
             state.password = action.payload.password
             state.password_confirmation = action.payload.password
+            state.photo = action.payload.photo
         },
         userAddressFilled: (state, action: PayloadAction<UserAddressForm>) => {
             state.address = action.payload.address

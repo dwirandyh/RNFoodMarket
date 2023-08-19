@@ -6068,6 +6068,11 @@ react-native-flipper@^0.210.0:
   resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.210.0.tgz#d292bb7d1afbdbf873c86a59014f266027fc108e"
   integrity sha512-5kyIM+V3cfO1msVVlbV5VsIQ4ltScq860tvyK1Tyk5ylNZ/7SqeRGsnWJcuBNA0xMkDyfwKZOGtSe6AEd+MA9A==
 
+react-native-image-picker@^5.6.1:
+  version "5.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-5.6.1.tgz#34ec5e26c48d5caa88ae7b273663c59d1793eecc"
+  integrity sha512-LPPlgJi97EzCDY4NWp7z0oUWmCbagnB6HSoKcLJHJD/DaFYN/dJPrqjqKaqqw8K/5Ze6DIsNg9PZohjNEYQQWQ==
+
 react-native-iphone-screen-helper@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/react-native-iphone-screen-helper/-/react-native-iphone-screen-helper-2.0.3.tgz#6bc6d19db5e4691d6204e9e996be9214c117c846"

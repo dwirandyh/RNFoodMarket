@@ -1,8 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Registeration } from "../slice/registration";
+import { PhotoData, Registeration } from "../slice/registration";
 import axios from "axios";
 import { API_HOST } from "../../config/api";
 import { RootState } from "../store";
+
+const uploadPhoto = async (token: string, photo: PhotoData) => {
+    const url = API_HOST.url + "/user/photo"
+    const photoForm = new FormData()
+    photoForm.append('file', photo)
+    await axios.post(url, photoForm,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'multipart/form-data',
+            }
+        }
+    )
+}
 
 const sendRegistrationData = createAsyncThunk(
     '/register',
@@ -11,6 +25,9 @@ const sendRegistrationData = createAsyncThunk(
             const { registration } = getState() as RootState
             const url = API_HOST.url + "/register"
             const response = await axios.post(url, registration)
+            if (response.data.data.access_token) {
+                await uploadPhoto(response.data.data.access_token, registration.photo)
+            }
             return response.data
         }
         catch (error) {
