@@ -3,13 +3,20 @@ import React, { useEffect } from 'react'
 import { Logo } from "../../assets";
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../router';
+import { getLocalData } from '../../utils';
 
 type Props = NativeStackScreenProps<RootStackParamList>
 
-const SplashScreen = (props: Props) => {
+const SplashScreen = ({ navigation }: Props) => {
     useEffect(() => {
         setTimeout(() => {
-            props.navigation.replace('SignIn')
+            getLocalData('token').then((res) => {
+                if (res) {
+                    navigation.replace('MainApp')
+                } else {
+                    navigation.replace('SignIn')
+                }
+            })
         }, 2000)
     })
 

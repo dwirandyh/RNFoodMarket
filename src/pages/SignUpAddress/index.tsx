@@ -11,6 +11,7 @@ import axios, { AxiosError } from 'axios'
 import { err } from 'react-native-svg/lib/typescript/xml'
 import { setLoading } from '../../redux/slice/global'
 import { sendRegistrationData } from '../../redux/action/authAction'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = NativeStackScreenProps<RootStackParamList>
 
@@ -38,29 +39,29 @@ const SignUpAddress = ({ navigation }: Props) => {
                 showToastMessage('An error occurred', 'danger');
             }
         }
-
-
     }
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} enabled>
-            <ScrollView style={{ flexGrow: 1 }}>
-                <View>
-                    <Header title='Address' subtitle='Make sure it’s valid' onBack={() => { navigation.pop() }} />
-                    <Gap height={24} />
-                    <View style={styles.formContainer}>
-                        <TextInput text='Phone No.' placeholder='Type your phone number' value={form.phoneNumber} onChangeText={(value) => { updateForm('phoneNumber', value) }} />
-                        <Gap height={16} />
-                        <TextInput text='Address' placeholder='Type your address' value={form.address} onChangeText={(value) => { updateForm('address', value) }} />
-                        <Gap height={16} />
-                        <TextInput text='House No.' placeholder='Type your house number' value={form.houseNumber} onChangeText={(value) => { updateForm('houseNumber', value) }} />
-                        <Gap height={16} />
-                        <Select text='City' items={['Jakarta', 'Bandung', 'Surabaya', 'Lampung']} onSelect={(value) => { updateForm('city', value) }} />
-                        <Gap height={16} />
-                        <Button text='Sign Up Now' type={ButtonType.Primary} onPress={onSubmit} />
+            <SafeAreaView style={{ flexGrow: 1, backgroundColor: 'white' }}>
+                <ScrollView>
+                    <View>
+                        <Header title='Address' subtitle='Make sure it’s valid' onBack={() => { navigation.pop() }} />
+                        <Gap height={24} width={'100%'} color='#FAFAFC' />
+                        <View style={styles.formContainer}>
+                            <TextInput text='Phone No.' placeholder='Type your phone number' value={form.phoneNumber} onChangeText={(value) => { updateForm('phoneNumber', value) }} />
+                            <Gap height={16} />
+                            <TextInput text='Address' placeholder='Type your address' value={form.address} onChangeText={(value) => { updateForm('address', value) }} />
+                            <Gap height={16} />
+                            <TextInput text='House No.' placeholder='Type your house number' value={form.houseNumber} onChangeText={(value) => { updateForm('houseNumber', value) }} />
+                            <Gap height={16} />
+                            <Select text='City' items={['Jakarta', 'Bandung', 'Surabaya', 'Lampung']} onSelect={(value) => { updateForm('city', value) }} />
+                            <Gap height={16} />
+                            <Button text='Sign Up Now' type={ButtonType.Primary} onPress={onSubmit} />
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </SafeAreaView>
         </KeyboardAvoidingView>
     )
 }

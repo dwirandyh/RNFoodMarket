@@ -5,18 +5,26 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../router';
 import ItemListMenu from '../ItemListMenu';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 type navigationProp = NativeStackNavigationProp<RootStackParamList>
 
 const Account = () => {
     const navigation = useNavigation<navigationProp>()
+
+    const signOut = async () => {
+        await AsyncStorage.multiRemove(['userProfile', 'token'])
+        navigation.reset({ index: 0, routes: [{ name: 'SignIn' }] })
+    }
+
     return (
         <View style={styles.tabItemContainer}>
             <ItemListMenu text='Edit Profile' />
             <ItemListMenu text='Home Address' />
             <ItemListMenu text='Security' />
             <ItemListMenu text='Payments' />
+            <ItemListMenu text='SignOut' onPress={signOut} />
         </View>
     )
 }

@@ -51,6 +51,7 @@ const SignIn = ({ navigation }: Props) => {
                     <TextInput
                         text='Password'
                         placeholder='Type your password'
+                        secureTextEntry={true}
                         value={form['password']}
                         onChangeText={(value) => updateForm('password', value)}
                     />

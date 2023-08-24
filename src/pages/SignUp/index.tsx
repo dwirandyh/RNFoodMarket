@@ -43,11 +43,11 @@ const SignUp = ({ navigation }: Props) => {
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} enabled>
-            <SafeAreaView style={{ backgroundColor: 'white' }}>
-                <ScrollView style={{ flexGrow: 1 }}>
+            <SafeAreaView style={{ flexGrow: 1, backgroundColor: 'white' }}>
+                <ScrollView>
                     <View style={styles.container}>
-                        <Header title='Sign Up' subtitle='Register and eat' onBack={() => { }} />
-                        <Gap height={24} />
+                        <Header title='Sign Up' subtitle='Register and eat' onBack={() => { navigation.pop() }} />
+                        <Gap height={24} width={'100%'} color='#FAFAFC' />
                         <View style={styles.formContainer}>
                             <TouchableOpacity activeOpacity={0.7} onPress={addPhoto}>
                                 <View style={styles.photo}>

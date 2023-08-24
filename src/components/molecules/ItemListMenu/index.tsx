@@ -4,11 +4,12 @@ import { IcChevronRight } from '../../../assets'
 
 type Props = {
     text: string
+    onPress?: () => void
 }
 
-const ItemListMenu = ({ text }: Props) => {
+const ItemListMenu = ({ text, onPress }: Props) => {
     return (
-        <TouchableOpacity activeOpacity={0.7}>
+        <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
             <View style={styles.container}>
                 <Text>{text}</Text>
                 <IcChevronRight />
