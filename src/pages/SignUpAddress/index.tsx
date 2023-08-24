@@ -4,13 +4,13 @@ import { Gap, Header, TextInput, Button, ButtonType, Select } from '../../compon
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
 import { RootStackParamList } from '../../router'
 import { showToastMessage, useForm } from '../../utils'
-import { UserAddressForm, userAddressFilled, userFilled } from '../../redux/slice/registration'
+import { UserAddressForm, userAddressFilled, userFilled } from '../../redux/slice/auth'
 import { RootState, store } from '../../redux/store'
 import { useAppDispatch, useAppSelector } from '../../hook'
-import sendRegistrationData from '../../redux/action/registerAction'
 import axios, { AxiosError } from 'axios'
 import { err } from 'react-native-svg/lib/typescript/xml'
 import { setLoading } from '../../redux/slice/global'
+import { sendRegistrationData } from '../../redux/action/authAction'
 
 type Props = NativeStackScreenProps<RootStackParamList>
 

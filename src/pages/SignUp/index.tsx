@@ -5,7 +5,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../router'
 import { showToastMessage, useForm } from '../../utils'
 import { useDispatch } from 'react-redux'
-import { PhotoData, UserForm, userFilled } from '../../redux/slice/registration'
+import { PhotoData, UserForm, userFilled } from '../../redux/slice/auth'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Asset, ImagePickerResponse, launchImageLibrary } from 'react-native-image-picker'
 

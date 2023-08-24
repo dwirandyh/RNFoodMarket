@@ -1,6 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
 import global from "./slice/global"
-import registration from "./slice/registration"
+import registration from "./slice/auth"
 import createDebugger from "redux-flipper";
 
 const middlewares = [

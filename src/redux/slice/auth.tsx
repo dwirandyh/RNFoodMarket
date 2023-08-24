@@ -1,5 +1,5 @@
 import { CaseReducer, PayloadAction, createSlice } from "@reduxjs/toolkit"
-import sendRegistrationData from "../action/registerAction"
+import { sendRegistrationData } from "../action/authAction"
 
 
 export interface PhotoData {
@@ -31,8 +31,6 @@ const initialStateRegister: Registeration = {
     houseNumber: '',
     phoneNumber: '',
 }
-
-
 
 export interface UserForm {
     name: string
