@@ -1,46 +1,75 @@
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TabView, SceneMap, TabBar, SceneRendererProps, NavigationState, Route } from 'react-native-tab-view'
 import FoodListItem from '../FoodListItem';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../router';
+import { useAppDispatch, useAppSelector } from '../../../hook';
+import { RootState } from '../../../redux/store';
+import { FoodModel } from '../../../model/Food';
+import { fetchFoodByType } from '../../../redux/action/foodAction';
+import { FoodType } from '../../../redux/slice/food';
 
 
 type navigationProp = NativeStackNavigationProp<RootStackParamList>
 
 const NewTeste = () => {
+    const dispatch = useAppDispatch()
     const navigation = useNavigation<navigationProp>()
+    const foods: Array<FoodModel> = useAppSelector((state: RootState) => state.food.newTaste)
+
+    useEffect(() => {
+        dispatch(fetchFoodByType(FoodType.newTaste)).unwrap()
+    }, [])
+
     return (
         <View style={styles.tabItemContainer}>
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            {
+                foods.map((item: FoodModel) => {
+                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail') }} />
+                })
+            }
         </View>
     )
 }
 
 const Popular = () => {
+    const dispatch = useAppDispatch()
     const navigation = useNavigation<navigationProp>()
-    return (
-        < View style={styles.tabItemContainer} >
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-        </View >
-    )
-};
+    const foods: Array<FoodModel> = useAppSelector((state: RootState) => state.food.popular)
 
-const Recommended = () => {
-    const navigation = useNavigation<navigationProp>()
+    useEffect(() => {
+        dispatch(fetchFoodByType(FoodType.popular)).unwrap()
+    }, [])
+
     return (
         <View style={styles.tabItemContainer}>
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
-            <FoodListItem onPress={() => { navigation.navigate('FoodDetail') }} />
+            {
+                foods.map((item: FoodModel) => {
+                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail') }} />
+                })
+            }
+        </View>
+    )
+}
+
+const Recommended = () => {
+    const dispatch = useAppDispatch()
+    const navigation = useNavigation<navigationProp>()
+    const foods: Array<FoodModel> = useAppSelector((state: RootState) => state.food.recommended)
+
+    useEffect(() => {
+        dispatch(fetchFoodByType(FoodType.recommeded)).unwrap()
+    }, [])
+
+    return (
+        <View style={styles.tabItemContainer}>
+            {
+                foods.map((item: FoodModel) => {
+                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail') }} />
+                })
+            }
         </View>
     )
 }

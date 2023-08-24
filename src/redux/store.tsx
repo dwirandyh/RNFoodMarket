@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
 import global from "./slice/global"
 import registration from "./slice/auth"
 import createDebugger from "redux-flipper";
+import food from "./slice/food";
 
 const middlewares = [
     /* other middlewares */
@@ -14,9 +15,9 @@ if (__DEV__) {
 
 export const store = configureStore({
     reducer: {
-        // auth: auth,
         registration: registration,
-        global: global
+        global: global,
+        food: food
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(createDebugger())

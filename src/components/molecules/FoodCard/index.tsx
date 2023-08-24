@@ -1,21 +1,22 @@
 import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { IcStar, IcStarOff } from '../../../assets'
 import { Gap } from '../../atoms'
 import Rating from '../Rating'
 
 type Props = {
+    title: string,
+    rating: number,
     image: ImageSourcePropType,
 }
 
-const FoodCard = ({ image }: Props) => {
+const FoodCard = ({ title, rating, image }: Props) => {
     return (
         <View style={styles.cardContainer}>
             <Image source={image} style={styles.image} />
             <View style={styles.content}>
-                <Text style={styles.text}>Cherry Healthy</Text>
+                <Text style={styles.text}>{title}</Text>
                 <Gap height={6} />
-                <Rating />
+                <Rating rating={rating} />
             </View>
         </View>
     )

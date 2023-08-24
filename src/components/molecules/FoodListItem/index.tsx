@@ -3,22 +3,27 @@ import React from 'react'
 import { FoodDummy1, IcStar, IcStarOff } from '../../../assets'
 import { Gap } from '../../atoms'
 import Rating from '../Rating'
+import formatNumber from '../../../utils/numberFormatter'
 
 type Props = {
+    image: string,
+    name: string,
+    price: number,
+    rating: number,
     onPress: () => void
 }
 
-const FoodListItem = ({ onPress }: Props) => {
+const FoodListItem = ({ image, name, price, rating, onPress }: Props) => {
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.container}>
-                <Image source={FoodDummy1} style={styles.image} />
+                <Image source={{ uri: image }} style={styles.image} />
                 <Gap width={12} />
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.foodTitle}>Soup Bumil</Text>
-                    <Text style={styles.foodPrice}>IDR 289.000</Text>
+                    <Text style={styles.foodTitle}>{name}</Text>
+                    <Text style={styles.foodPrice}>IDR {formatNumber(price)}</Text>
                 </View>
-                <Rating />
+                <Rating rating={rating} />
             </View>
         </TouchableOpacity>
     )

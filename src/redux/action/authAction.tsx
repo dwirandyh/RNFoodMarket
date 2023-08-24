@@ -1,11 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { PhotoData, Registeration } from "../slice/auth";
+import { PhotoData } from "../slice/auth";
 import axios from "axios";
 import { API_HOST } from "../../config/api";
 import { RootState } from "../store";
 import { storeLocalData } from "../../utils";
 import { UserModel, Convert } from "../../model";
-import { useAppDispatch } from "../../hook";
 import { setLoading } from "../slice/global";
 
 const uploadPhoto = async (token: string, photo: PhotoData) => {

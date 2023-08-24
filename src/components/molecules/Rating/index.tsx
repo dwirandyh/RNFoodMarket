@@ -3,18 +3,28 @@ import React from 'react'
 import { IcStar, IcStarOff } from '../../../assets'
 import { Gap } from '../../atoms'
 
-type Props = {}
+type Props = {
+    rating: number
+}
 
-const Rating = (props: Props) => {
+const Rating = ({ rating }: Props) => {
+    const renderStar = () => {
+        var stars = []
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                stars.push(<IcStar key={i} />)
+            }
+            else {
+                stars.push(<IcStarOff key={i} />)
+            }
+        }
+        return stars
+    }
     return (
         <View style={styles.ratingContainer}>
-            <IcStar />
-            <IcStar />
-            <IcStar />
-            <IcStar />
-            <IcStarOff />
+            {renderStar()}
             <Gap width={4} />
-            <Text style={styles.ratingText}>4.5</Text>
+            <Text style={styles.ratingText}>{rating}</Text>
         </View>
     )
 }

@@ -1,13 +1,26 @@
 import { StyleSheet, Text, View, Image, ScrollView, useWindowDimensions, SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FoodDummy1, FoodDummy2, FoodDummy3, ProfileDummy } from '../../assets'
-import { FoodCard, HomeProfile, HomeTabSection } from '../../components'
+import { Button, ButtonType, FoodCard, HomeProfile, HomeTabSection } from '../../components'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../router'
+import { useAppDispatch, useAppSelector } from '../../hook'
+import { RootState } from '../../redux/store'
+import { Food, FoodType } from '../../redux/slice/food'
+import { fetchHighlightedFood } from '../../redux/action/foodAction'
+import { FoodModel } from '../../model/Food'
+import FoodListItem from '../../components/molecules/FoodListItem'
 
 type Props = NativeStackScreenProps<RootStackParamList>
 
-const Home = (props: Props) => {
+const Home = ({ navigation }: Props) => {
+    const food: Food = useAppSelector((state: RootState) => state.food)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchHighlightedFood()).unwrap()
+    }, [])
+
     return (
         <ScrollView>
             <View style={styles.page}>
@@ -15,9 +28,11 @@ const Home = (props: Props) => {
                 <View>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                         <View style={styles.foodCardContainer}>
-                            <FoodCard image={FoodDummy1} />
-                            <FoodCard image={FoodDummy2} />
-                            <FoodCard image={FoodDummy3} />
+                            {
+                                food.highlightedFood.map((item: FoodModel) => {
+                                    return <FoodCard key={item.id} title={item.name} rating={item.rate} image={{ uri: item.picturePath }} />
+                                })
+                            }
                         </View>
                     </ScrollView>
                 </View>
