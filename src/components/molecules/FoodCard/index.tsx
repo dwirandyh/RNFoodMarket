@@ -1,4 +1,4 @@
-import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
+import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Gap } from '../../atoms'
 import Rating from '../Rating'
@@ -7,17 +7,20 @@ type Props = {
     title: string,
     rating: number,
     image: ImageSourcePropType,
+    onPress: () => void
 }
 
-const FoodCard = ({ title, rating, image }: Props) => {
+const FoodCard = ({ title, rating, image, onPress }: Props) => {
     return (
         <View style={styles.cardContainer}>
-            <Image source={image} style={styles.image} />
-            <View style={styles.content}>
-                <Text style={styles.text}>{title}</Text>
-                <Gap height={6} />
-                <Rating rating={rating} />
-            </View>
+            <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+                <Image source={image} style={styles.image} />
+                <View style={styles.content}>
+                    <Text style={styles.text}>{title}</Text>
+                    <Gap height={6} />
+                    <Rating rating={rating} />
+                </View>
+            </TouchableOpacity>
         </View>
     )
 }

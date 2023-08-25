@@ -27,7 +27,7 @@ const NewTeste = () => {
         <View style={styles.tabItemContainer}>
             {
                 foods.map((item: FoodModel) => {
-                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail') }} />
+                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail', { food: item }) }} />
                 })
             }
         </View>
@@ -47,7 +47,7 @@ const Popular = () => {
         <View style={styles.tabItemContainer}>
             {
                 foods.map((item: FoodModel) => {
-                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail') }} />
+                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail', { food: item }) }} />
                 })
             }
         </View>
@@ -67,7 +67,7 @@ const Recommended = () => {
         <View style={styles.tabItemContainer}>
             {
                 foods.map((item: FoodModel) => {
-                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail') }} />
+                    return <FoodListItem key={item.id} name={item.name} image={item.picturePath} rating={item.rate} price={item.price} onPress={() => { navigation.navigate('FoodDetail', { food: item }) }} />
                 })
             }
         </View>

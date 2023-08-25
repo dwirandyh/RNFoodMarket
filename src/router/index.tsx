@@ -9,6 +9,7 @@ import Profile from "../pages/Profile";
 import Order from "../pages/Order";
 import { BottomNavigator } from "../components";
 import { SafeAreaView } from "react-native";
+import { FoodModel } from "../model/Food";
 
 export type RootStackParamList = {
     SplashScreen: undefined
@@ -17,7 +18,7 @@ export type RootStackParamList = {
     SignUpAddress: undefined
     SignUpSuccess: undefined
     MainApp: undefined
-    FoodDetail: undefined
+    FoodDetail: { food: FoodModel }
     OrderSummary: undefined,
     SuccessOrder: undefined,
     OrderDetail: undefined

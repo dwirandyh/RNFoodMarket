@@ -1,17 +1,29 @@
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { FoodDummy1, IcBackWhite, IcButtonMinus, IcButtonPlus } from '../../assets'
-import { Button, ButtonType, Gap, Rating } from '../../components'
+import { Button, ButtonType, Gap, ItemCounter, Rating } from '../../components'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../router'
+import { FoodModel } from '../../model/Food'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+import formatNumber from '../../utils/numberFormatter'
 
-type Props = NativeStackScreenProps<RootStackParamList>
+type Props = NativeStackScreenProps<RootStackParamList, 'FoodDetail'>
 
-const FoodDetail = ({ navigation }: Props) => {
+const FoodDetail = ({ navigation, route }: Props) => {
+    const food: FoodModel = route.params.food
+    const [totalPrice, setTotalPrice] = useState(food.price)
+    const insets = useSafeAreaInsets()
+
+    const onCounterChange = (value: number) => {
+        console.log(value)
+        setTotalPrice(food.price * value)
+    }
+
     return (
-        <View style={styles.page}>
-            <ImageBackground source={FoodDummy1} style={styles.cover}>
-                <TouchableOpacity activeOpacity={0.7} onPress={() => { navigation.pop() }}>
+        <SafeAreaView style={styles.page} edges={['bottom', 'left', 'right']}>
+            <ImageBackground source={{ uri: food.picturePath }} style={styles.cover}>
+                <TouchableOpacity activeOpacity={0.7} onPress={() => { navigation.pop() }} style={{ marginTop: insets.top + 16 }}>
                     <IcBackWhite />
                 </TouchableOpacity>
             </ImageBackground>
@@ -19,43 +31,28 @@ const FoodDetail = ({ navigation }: Props) => {
                 <View style={styles.mainContent}>
                     <View style={styles.titleContainer}>
                         <View>
-                            <Text style={styles.foodTitle}>Cherry Healthy</Text>
+                            <Text style={styles.foodTitle}>{food.name}</Text>
                             <Gap height={6} />
-                            <Rating />
+                            <Rating rating={food.rate} />
                         </View>
-                        <View style={styles.chartCountContainer}>
-                            <TouchableOpacity activeOpacity={0.7}>
-                                <IcButtonPlus />
-                            </TouchableOpacity>
-                            <Gap width={10} />
-                            <Text style={styles.chartCount}>14</Text>
-                            <Gap width={10} />
-                            <TouchableOpacity activeOpacity={0.7}>
-                                <IcButtonMinus />
-                            </TouchableOpacity>
-                        </View>
+                        <ItemCounter onValueChange={onCounterChange} />
                     </View>
                     <Gap height={14} />
-                    <Text style={styles.contentDescription}>
-                        Makanan khas Bandung yang cukup sering
-                        dipesan oleh anak muda dengan pola makan
-                        yang cukup tinggi dengan mengutamakan
-                        diet yang sehat dan teratur.
-                    </Text>
+                    <Text style={styles.contentDescription}>{food.description}</Text>
                     <Gap height={16} />
                     <Text>
                         Ingredients:
                     </Text>
                     <Gap height={4} />
                     <Text style={styles.contentDescription}>
-                        Seledri, telur, blueberry, madu.
+                        {food.ingredients}
                     </Text>
                 </View>
                 <View>
                     <View style={styles.orderContainer}>
                         <View>
                             <Text style={styles.priceTitle}>Total Price:</Text>
-                            <Text style={styles.price}>IDR 12.289.000</Text>
+                            <Text style={styles.price}>IDR {formatNumber(totalPrice)}</Text>
                         </View>
                         <View style={styles.orderButton}>
                             <Button text='Order Now' type={ButtonType.Primary} onPress={() => { navigation.navigate('OrderSummary') }} />
@@ -63,7 +60,7 @@ const FoodDetail = ({ navigation }: Props) => {
                     </View>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -72,10 +69,10 @@ export default FoodDetail
 const styles = StyleSheet.create({
     page: {
         flex: 1,
+        backgroundColor: 'white'
     },
     cover: {
         height: 330,
-        paddingTop: 28,
         paddingLeft: 20
     },
     foodContainer: {
@@ -97,15 +94,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         fontSize: 16,
         color: '#020202'
-    },
-    chartCountContainer: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    chartCount: {
-        color: '#020202',
-        fontFamily: 'Poppins-Regular',
-        fontSize: 16
     },
     contentDescription: {
         color: '#8D92A3',

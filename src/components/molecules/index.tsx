@@ -7,6 +7,7 @@ import FoodListItemPastOrder from "./FoodListItemPastOrder";
 import Header from "./Header";
 import HomeTabSection from "./HomeTabSection";
 import HomeProfile from "./HomeProfile";
+import ItemCounter from "./ItemCounter";
 import ItemListMenu from "./ItemListMenu";
 import ProfileTabSection from "./ProfileTabSection";
 import Rating from "./Rating";
@@ -22,6 +23,7 @@ export {
     FoodListItemPastOrder,
     HomeTabSection,
     HomeProfile,
+    ItemCounter,
     ItemListMenu,
     ProfileTabSection,
     Rating,

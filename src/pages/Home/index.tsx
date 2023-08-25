@@ -30,7 +30,7 @@ const Home = ({ navigation }: Props) => {
                         <View style={styles.foodCardContainer}>
                             {
                                 food.highlightedFood.map((item: FoodModel) => {
-                                    return <FoodCard key={item.id} title={item.name} rating={item.rate} image={{ uri: item.picturePath }} />
+                                    return <FoodCard key={item.id} title={item.name} rating={item.rate} image={{ uri: item.picturePath }} onPress={() => navigation.navigate('FoodDetail', { food: item })} />
                                 })
                             }
                         </View>

@@ -48,15 +48,12 @@ export const fetchFoodByType = createAsyncThunk(
 
             switch (type) {
                 case FoodType.newTaste:
-                    console.log('load: newTaste')
                     dispatch(newTasteLoaded(foods))
                     break
                 case FoodType.popular:
-                    console.log('load: popular')
                     dispatch(popularLoaded(foods))
                     break
                 case FoodType.recommeded:
-                    console.log('load: recommeded')
                     dispatch(recommendedLoaded(foods))
                     break
             }
