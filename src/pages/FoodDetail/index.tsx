@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { FoodDummy1, IcBackWhite, IcButtonMinus, IcButtonPlus } from '../../assets'
 import { Button, ButtonType, Gap, ItemCounter, Rating } from '../../components'
@@ -13,10 +13,11 @@ type Props = NativeStackScreenProps<RootStackParamList, 'FoodDetail'>
 const FoodDetail = ({ navigation, route }: Props) => {
     const food: FoodModel = route.params.food
     const [totalPrice, setTotalPrice] = useState(food.price)
+    const [orderCount, setOrderCount] = useState(1)
     const insets = useSafeAreaInsets()
 
     const onCounterChange = (value: number) => {
-        console.log(value)
+        setOrderCount(value)
         setTotalPrice(food.price * value)
     }
 
@@ -28,7 +29,7 @@ const FoodDetail = ({ navigation, route }: Props) => {
                 </TouchableOpacity>
             </ImageBackground>
             <View style={styles.foodContainer}>
-                <View style={styles.mainContent}>
+                <ScrollView style={styles.mainContent} showsVerticalScrollIndicator={false}>
                     <View style={styles.titleContainer}>
                         <View>
                             <Text style={styles.foodTitle}>{food.name}</Text>
@@ -47,7 +48,7 @@ const FoodDetail = ({ navigation, route }: Props) => {
                     <Text style={styles.contentDescription}>
                         {food.ingredients}
                     </Text>
-                </View>
+                </ScrollView>
                 <View>
                     <View style={styles.orderContainer}>
                         <View>
@@ -55,7 +56,7 @@ const FoodDetail = ({ navigation, route }: Props) => {
                             <Text style={styles.price}>IDR {formatNumber(totalPrice)}</Text>
                         </View>
                         <View style={styles.orderButton}>
-                            <Button text='Order Now' type={ButtonType.Primary} onPress={() => { navigation.navigate('OrderSummary') }} />
+                            <Button text='Order Now' type={ButtonType.Primary} onPress={() => { navigation.navigate('OrderSummary', { food: food, orderCount: orderCount }) }} />
                         </View>
                     </View>
                 </View>

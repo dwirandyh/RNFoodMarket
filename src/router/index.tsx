@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import React from "react"
-import { FoodDetail, Home, OrderDetail, OrderSummary, SignIn, SplashScreen, SuccessOrder } from "../pages"
+import { FoodDetail, Home, OrderDetail, OrderSummary, SignIn, SplashScreen, SuccessOrder, WebView } from "../pages"
 import SignUp from "../pages/SignUp";
 import SignUpAddress from "../pages/SignUpAddress";
 import SignUpSuccess from "../pages/SignUpSuccess";
@@ -10,6 +10,7 @@ import Order from "../pages/Order";
 import { BottomNavigator } from "../components";
 import { SafeAreaView } from "react-native";
 import { FoodModel } from "../model/Food";
+import { WebViewNavigation } from "react-native-webview";
 
 export type RootStackParamList = {
     SplashScreen: undefined
@@ -19,9 +20,10 @@ export type RootStackParamList = {
     SignUpSuccess: undefined
     MainApp: undefined
     FoodDetail: { food: FoodModel }
-    OrderSummary: undefined,
-    SuccessOrder: undefined,
+    OrderSummary: { food: FoodModel, orderCount: number }
+    SuccessOrder: undefined
     OrderDetail: undefined
+    WebView: { title: string, subtitle: string, url: string, onNavigationChange: (event: WebViewNavigation) => void }
 };
 
 type TabNavigatorParamList = {
@@ -58,6 +60,7 @@ const Router = () => {
             <Stack.Screen name="OrderSummary" component={OrderSummary} options={{ headerShown: false }} />
             <Stack.Screen name="SuccessOrder" component={SuccessOrder} options={{ headerShown: false }} />
             <Stack.Screen name="OrderDetail" component={OrderDetail} options={{ headerShown: false }} />
+            <Stack.Screen name="WebView" component={WebView} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }
