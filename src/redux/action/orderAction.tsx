@@ -13,9 +13,6 @@ export const checkHasOrder = createAsyncThunk(
         const url = API_HOST.url + "/transaction"
         const token = await getLocalData('token')
         const response = await axios.get(url, {
-            params: {
-                status: 'PENDING,ON_DELIVERY'
-            },
             headers: {
                 'Authorization': 'Bearer ' + token,
             }
