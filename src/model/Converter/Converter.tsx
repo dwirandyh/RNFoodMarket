@@ -11,7 +11,7 @@ export class Converter {
             quantity: object.quantity,
             total: object.total,
             status: object.status as TransactionStatus,
-            paymentUrl: object.paymentUrl,
+            paymentUrl: object.payment_url,
             food: this.toFood(object.food),
             user: this.toUser(object.user),
             createdAt: object.created_at

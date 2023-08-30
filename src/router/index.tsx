@@ -11,6 +11,7 @@ import { BottomNavigator } from "../components";
 import { SafeAreaView } from "react-native";
 import { FoodModel } from "../model/Food";
 import { WebViewNavigation } from "react-native-webview";
+import { TransactionModel } from "../model/Transaction";
 
 export type RootStackParamList = {
     SplashScreen: undefined
@@ -22,7 +23,7 @@ export type RootStackParamList = {
     FoodDetail: { food: FoodModel }
     OrderSummary: { food: FoodModel, orderCount: number }
     SuccessOrder: undefined
-    OrderDetail: undefined
+    OrderDetail: { transaction: TransactionModel }
     WebView: { title: string, subtitle: string, url: string, onNavigationChange: (event: WebViewNavigation) => void }
 };
 

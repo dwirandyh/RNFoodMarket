@@ -27,7 +27,7 @@ const OrderInProgress = () => {
         <ScrollView style={styles.tabItemScrollView}>
             <View style={styles.tabItemContainer}>
                 {inProgress.map((item) => {
-                    return <FoodListItemInProgress key={item.id} transaction={item} onPress={() => { navigation.navigate('OrderDetail') }} />
+                    return <FoodListItemInProgress key={item.id} transaction={item} onPress={() => { navigation.navigate('OrderDetail', { transaction: item }) }} />
                 })}
             </View>
         </ScrollView>
@@ -47,7 +47,7 @@ const PastOrders = () => {
         <ScrollView style={styles.tabItemScrollView}>
             <View style={styles.tabItemContainer}>
                 {pastOrders.map((item) => {
-                    return <FoodListItemPastOrder key={item.id} transaction={item} onPress={() => { navigation.navigate('OrderDetail') }} />
+                    return <FoodListItemPastOrder key={item.id} transaction={item} onPress={() => { navigation.navigate('OrderDetail', { transaction: item }) }} />
                 })}
             </View>
         </ScrollView>

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setLoading } from "../slice/global";
 import axios from "axios";
 import { API_HOST } from "../../config/api";
-import { TransactionModel } from "../../model/Transaction";
+import { TransactionModel, TransactionStatus } from "../../model/Transaction";
 import { Converter } from "../../model/Converter/Converter";
 import { hasOrder, orderInProgressLoaded, pastOrdersLoaded } from "../slice/order";
 import { getLocalData } from "../../utils";
@@ -76,6 +76,32 @@ export const fetchPastOrders = createAsyncThunk(
             const transactions = await fetchTransaction('DELIVERED,CANCELLED')
             dispatch(pastOrdersLoaded(transactions))
             dispatch(setLoading(false))
+        } catch (error) {
+            dispatch(setLoading(false))
+            if (axios.isAxiosError(error) && error.response) {
+                return rejectWithValue(error.response.data)
+            }
+            throw error
+        }
+    }
+)
+
+export const requestCancelOrder = createAsyncThunk(
+    'order/cancel',
+    async (id: number, { dispatch, rejectWithValue }) => {
+        try {
+            dispatch(setLoading(true))
+            const url = API_HOST.url + '/transaction/' + id
+            const token = await getLocalData('token')
+            const response = await axios.post(url, {
+                status: TransactionStatus.cancelled
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                }
+            })
+            dispatch(setLoading(false))
+            return response.data
         } catch (error) {
             dispatch(setLoading(false))
             if (axios.isAxiosError(error) && error.response) {
