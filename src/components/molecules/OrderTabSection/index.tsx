@@ -1,5 +1,5 @@
 import { LayoutChangeEvent, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import { Gap } from '../../atoms'
 import { NavigationState, Route, SceneMap, SceneRendererProps, TabBar, TabView } from 'react-native-tab-view'
@@ -9,35 +9,46 @@ import FoodListItemPastOrder from '../FoodListItemPastOrder'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../../router'
+import { useAppDispatch, useAppSelector } from '../../../hook'
+import { fetchOrderInProgress, fetchPastOrders } from '../../../redux/action/orderAction'
 
 type navigationProp = NativeStackNavigationProp<RootStackParamList>
 
 const OrderInProgress = () => {
     const navigation = useNavigation<navigationProp>()
+    const inProgress = useAppSelector((state) => state.order.inProgress)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchOrderInProgress()).unwrap()
+    }, [])
+
     return (
         <ScrollView style={styles.tabItemScrollView}>
             <View style={styles.tabItemContainer}>
-                <FoodListItemInProgress onPress={() => { navigation.navigate('OrderDetail') }} />
-                <FoodListItemInProgress onPress={() => { }} />
-                <FoodListItemInProgress onPress={() => { }} />
-                <FoodListItemInProgress onPress={() => { }} />
-                <FoodListItemInProgress onPress={() => { }} />
-                <FoodListItemInProgress onPress={() => { }} />
+                {inProgress.map((item) => {
+                    return <FoodListItemInProgress key={item.id} transaction={item} onPress={() => { navigation.navigate('OrderDetail') }} />
+                })}
             </View>
         </ScrollView>
     )
 }
 
 const PastOrders = () => {
+    const navigation = useNavigation<navigationProp>()
+    const pastOrders = useAppSelector((state) => state.order.pastOrders)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchPastOrders()).unwrap()
+    }, [])
+
     return (
         <ScrollView style={styles.tabItemScrollView}>
             <View style={styles.tabItemContainer}>
-                <FoodListItemPastOrder onPress={() => { }} />
-                <FoodListItemPastOrder onPress={() => { }} />
-                <FoodListItemPastOrder onPress={() => { }} />
-                <FoodListItemPastOrder onPress={() => { }} />
-                <FoodListItemPastOrder onPress={() => { }} />
-                <FoodListItemPastOrder onPress={() => { }} />
+                {pastOrders.map((item) => {
+                    return <FoodListItemPastOrder key={item.id} transaction={item} onPress={() => { navigation.navigate('OrderDetail') }} />
+                })}
             </View>
         </ScrollView>
     )

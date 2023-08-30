@@ -1,26 +1,38 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { FoodDummy1, IcStar, IcStarOff } from '../../../assets'
 import { Gap } from '../../atoms'
-import Rating from '../Rating'
+import { TransactionModel, TransactionStatus } from '../../../model/Transaction'
+import formatNumber from '../../../utils/numberFormatter'
 
 type Props = {
+    transaction: TransactionModel
     onPress: () => void
 }
 
-const FoodListItemPastOrder = ({ onPress }: Props) => {
+const FoodListItemPastOrder = ({ transaction, onPress }: Props) => {
+    const date = new Date(transaction.createdAt)
+
+    const transactionStatus = () => {
+        if (transaction.status == TransactionStatus.delivered) {
+            return 'Delivered'
+        }
+        else {
+            return 'Cancelled'
+        }
+    }
+
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.container}>
-                <Image source={FoodDummy1} style={styles.image} />
+                <Image source={{ uri: transaction.food.picturePath }} style={styles.image} />
                 <Gap width={12} />
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.foodTitle}>Soup Bumil</Text>
-                    <Text style={styles.foodPrice}>IDR 289.000</Text>
+                    <Text style={styles.foodTitle}>{transaction.food.name}</Text>
+                    <Text style={styles.foodPrice}>IDR {formatNumber(transaction.total)}</Text>
                 </View>
                 <View>
-                    <Text style={styles.orderDate}>Jun 12, 14:00</Text>
-                    <Text style={styles.orderStatus}>Cancelled</Text>
+                    <Text style={styles.orderDate}>{date.toLocaleDateString()}</Text>
+                    <Text style={[styles.orderStatus, { color: transaction.status == TransactionStatus.cancelled ? '#D9435E' : '#1ABC9C' }]}>{transactionStatus()}</Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -58,7 +70,6 @@ const styles = StyleSheet.create({
         textAlign: 'right'
     },
     orderStatus: {
-        color: '#D9435E',
         fontSize: 10,
         fontFamily: 'Poppins-Regular',
         textAlign: 'right'

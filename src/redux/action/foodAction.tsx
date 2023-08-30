@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { API_HOST } from "../../config/api"
-import { FoodModel, Convert } from "../../model/Food"
+import { FoodModel } from "../../model/Food"
 import { setLoading } from "../slice/global"
 import { FoodType, highlightedFoodLoaded, newTasteLoaded, popularLoaded, recommendedLoaded } from "../slice/food"
+import { Converter } from "../../model/Converter/Converter"
 
 export const fetchHighlightedFood = createAsyncThunk(
     '/food/highlighted',
@@ -14,7 +15,7 @@ export const fetchHighlightedFood = createAsyncThunk(
             const url = API_HOST.url + "/food"
             const response = await axios.get(url)
             const foods: Array<FoodModel> = response.data.data.data.map((item: any) => {
-                return Convert.toFood(item)
+                return Converter.toFood(item)
             })
 
             dispatch(highlightedFoodLoaded(foods))
@@ -43,7 +44,7 @@ export const fetchFoodByType = createAsyncThunk(
                 }
             })
             const foods: Array<FoodModel> = response.data.data.data.map((item: any) => {
-                return Convert.toFood(item)
+                return Converter.toFood(item)
             })
 
             switch (type) {

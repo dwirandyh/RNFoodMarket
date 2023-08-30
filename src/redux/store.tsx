@@ -3,6 +3,7 @@ import global from "./slice/global"
 import registration from "./slice/auth"
 import createDebugger from "redux-flipper";
 import food from "./slice/food";
+import order from "./slice/order";
 
 const middlewares = [
     /* other middlewares */
@@ -17,7 +18,8 @@ export const store = configureStore({
     reducer: {
         registration: registration,
         global: global,
-        food: food
+        food: food,
+        order: order
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(createDebugger())

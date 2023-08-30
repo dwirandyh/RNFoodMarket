@@ -8,18 +8,3 @@ export interface FoodModel {
     rate: number
     types: string
 }
-
-export class Convert {
-    public static toFood(object: any): FoodModel {
-        return {
-            id: object.id,
-            picturePath: object.picturePath,
-            name: object.name,
-            description: object.description,
-            ingredients: object.ingredients,
-            price: object.price,
-            rate: object.rate,
-            types: object.types
-        }
-    }
-}

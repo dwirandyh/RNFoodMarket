@@ -4,8 +4,9 @@ import axios from "axios";
 import { API_HOST } from "../../config/api";
 import { RootState } from "../store";
 import { storeLocalData } from "../../utils";
-import { UserModel, Convert } from "../../model";
+import { UserModel } from "../../model";
 import { setLoading } from "../slice/global";
+import { Converter } from "../../model/Converter/Converter";
 
 const uploadPhoto = async (token: string, photo: PhotoData) => {
     const url = API_HOST.url + "/user/photo"
@@ -30,7 +31,7 @@ export const sendRegistrationData = createAsyncThunk(
             const url = API_HOST.url + "/register"
             const response = await axios.post(url, registration)
 
-            var userModel: UserModel = Convert.toUser(response.data.data.user)
+            var userModel: UserModel = Converter.toUser(response.data.data.user)
             var uploadedPhoto
             if (response.data.data.access_token && registration.photo.name) {
                 uploadedPhoto = await uploadPhoto(response.data.data.access_token, registration.photo)
@@ -58,7 +59,7 @@ export const requestLogin = createAsyncThunk(
             dispatch(setLoading(true))
             const url = API_HOST.url + "/login"
             const response = await axios.post(url, login)
-            const userModel: UserModel = Convert.toUser(response.data.data.user)
+            const userModel: UserModel = Converter.toUser(response.data.data.user)
             storeLocalData('loggedUser', userModel)
             storeLocalData('token', response.data.data.access_token)
             dispatch(setLoading(false))

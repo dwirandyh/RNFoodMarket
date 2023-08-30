@@ -15,7 +15,7 @@ export enum FoodType {
 }
 
 const initialState: Food = {
-    highlightedFood: [] as FoodModel[],
+    highlightedFood: [],
     newTaste: [],
     popular: [],
     recommended: []
