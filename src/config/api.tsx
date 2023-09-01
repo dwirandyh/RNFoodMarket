@@ -4,6 +4,6 @@
 // }
 
 export const API_HOST = {
-    url: 'http://localhost/api',
-    storage: 'http://localhost',
+    url: 'https://foodmarket.dwirandyh.com/api',
+    storage: 'https://foodmarket.dwirandyh.com',
 }
