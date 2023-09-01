@@ -24,7 +24,7 @@ const Account = () => {
             <ItemListMenu text='Home Address' />
             <ItemListMenu text='Security' />
             <ItemListMenu text='Payments' />
-            <ItemListMenu text='SignOut' onPress={signOut} />
+            <ItemListMenu text='Sign Out' onPress={signOut} />
         </View>
     )
 }
